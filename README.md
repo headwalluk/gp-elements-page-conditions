@@ -1,0 +1,52 @@
+# GP Elements Page Conditions
+
+![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759B?logo=wordpress&logoColor=white)
+![GeneratePress](https://img.shields.io/badge/GeneratePress%20Premium-2.0%2B-1e3a8a)
+![PHP](https://img.shields.io/badge/PHP-8.0%2B-777BB4?logo=php&logoColor=white)
+![License](https://img.shields.io/badge/license-GPLv2%20or%20later-blue)
+
+A small WordPress plugin by [Headwall Hosting](https://headwall-hosting.com) that adds a paging condition to GeneratePress Premium Elements.
+
+GeneratePress Elements can target a taxonomy archive, but not a particular *page* of it. This plugin adds a **Paging Condition** meta box to every Element, so page one of an archive can carry a large hero with SEO copy and a featured-post layout, while pages two onwards use a compact hero and a plain list.
+
+## Conditions
+
+| Condition | Behaviour |
+| --- | --- |
+| **Pass through** | No paging condition. The default. |
+| **Only show on page one** | Hidden once the visitor pages past the first page. |
+| **Never show on page one** | Hidden on the first page, shown from page two on. |
+| **Only show on pages…** | Shown only on the page numbers listed. |
+
+The page list is comma separated and accepts single pages (`3`), ranges (`2-5`) and open ranges (`4-` for page four onwards, `-3` for up to page three). Unparseable segments are dropped on save, and an empty list passes through rather than hiding the Element everywhere.
+
+## Where it applies
+
+Anywhere a page number is meaningful: term and post type archives, the blog index, search results, and multi-page single posts split with `<!--nextpage-->`. On any unpaginated view the current page counts as page one.
+
+The condition is applied *on top of* the Element's own display rules — it can only hide an Element that GeneratePress was already going to show, never reveal one that was excluded.
+
+## Installation
+
+Drop the plugin into `wp-content/plugins/` and activate it. It needs the Elements module of GeneratePress Premium; without it the plugin is inert and shows an admin notice.
+
+There is no build step — no npm, no Composer, no bundler.
+
+## Migrating from the ACF implementation
+
+This plugin replaces an ACF field group and a `functions.php` filter previously used on Headwall sites. The meta key is unchanged, so migration is:
+
+1. Activate this plugin.
+2. Delete the ACF field group that provided `archive_paging_visibility`.
+3. Remove the `generate_element_display` filter from the theme.
+
+Existing Elements keep their settings. The one behaviour change is scope: the theme version tested `is_archive()` only, so the blog index and search results were silently excluded. This plugin covers them, which means an Element set to *Never show on page one* with a broad display rule will now also be hidden on unpaginated views, since those count as page one.
+
+## Developer documentation
+
+- [CHANGELOG.md](CHANGELOG.md) — per-version release notes
+- [CLAUDE.md](CLAUDE.md) — architecture, conventions and file layout
+
+## License
+
+Licensed under [GPLv2 or later](LICENSE).

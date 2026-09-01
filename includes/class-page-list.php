@@ -21,6 +21,11 @@ defined( 'ABSPATH' ) || die();
  *   -3   an open range, up to and including page three
  *
  * Anything else, including a reversed range such as "5-2", is discarded.
+ *
+ * Typographic dashes are folded to an ASCII hyphen before parsing. German and
+ * Polish set ranges with an en dash, so the translated help text for this field
+ * says to type "2–5"; word processors and browsers autocorrect hyphens the same
+ * way. Without the fold, a segment copied from any of those is silently dropped.
  */
 class Page_List {
 
@@ -79,13 +84,35 @@ class Page_List {
 	 */
 	private static function split( string $raw_list ): array {
 		$segments = array();
+		$ascii    = self::fold_dashes( $raw_list );
 
-		if ( '' !== trim( $raw_list ) ) {
-			$segments = array_map( 'trim', explode( ',', $raw_list ) );
+		if ( '' !== trim( $ascii ) ) {
+			$segments = array_map( 'trim', explode( ',', $ascii ) );
 			$segments = array_values( array_filter( $segments, 'strlen' ) );
 		}
 
 		return $segments;
+	}
+
+	/**
+	 * Fold the dash characters a visitor might paste in down to ASCII.
+	 *
+	 * @param string $raw_list Raw page list.
+	 *
+	 * @return string The list with every dash variant as a hyphen-minus.
+	 */
+	private static function fold_dashes( string $raw_list ): string {
+		$dash_variants = array(
+			"\u{2010}", // Hyphen.
+			"\u{2011}", // Non-breaking hyphen.
+			"\u{2012}", // Figure dash.
+			"\u{2013}", // En dash.
+			"\u{2014}", // Em dash.
+			"\u{2015}", // Horizontal bar.
+			"\u{2212}", // Minus sign.
+		);
+
+		return str_replace( $dash_variants, '-', $raw_list );
 	}
 
 	/**

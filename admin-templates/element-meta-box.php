@@ -43,22 +43,33 @@ printf(
 printf(
 	'<label for="%s">%s</label>',
 	esc_attr( PAGES_FIELD_ID ),
-	esc_html__( 'Page numbers', 'gp-elements-page-conditions' )
+	esc_html_x( 'Page numbers', 'field label; pages of a paginated archive', 'gp-elements-page-conditions' )
 );
 
+// The placeholder is a format example, not prose. Page_List only parses ASCII
+// digits separated by commas and hyphens, so it must not be translated.
 printf(
 	'<input type="text" class="regular-text" id="%s" name="%s" value="%s" placeholder="%s" />',
 	esc_attr( PAGES_FIELD_ID ),
 	esc_attr( META_PAGES ),
 	esc_attr( $current_pages ),
-	esc_attr__( '2-5, 8', 'gp-elements-page-conditions' )
+	esc_attr( PAGES_FIELD_EXAMPLE )
 );
 
+// The four format examples are syntax, not prose. Passing them as placeholders
+// keeps them out of the .po files: DeepL renders a range as "2–5" with an en
+// dash in German and Polish, which would document a format we do not accept.
 printf(
 	'<span class="description">%s</span>',
-	esc_html__(
-		'Comma separated. Accepts single pages (3), ranges (2-5) and open ranges (4- for page four onwards, -3 for up to page three). Leaving this empty passes through.',
-		'gp-elements-page-conditions'
+	esc_html(
+		sprintf(
+			/* translators: 1: single page example, 2: closed range example, 3: open range example, 4: open range example. All four are literal syntax and must not be translated. */
+			__( 'Comma separated. Accepts single pages (%1$s), ranges (%2$s) and open ranges (%3$s for page four onwards, %4$s for up to page three). Leaving this empty passes through.', 'gp-elements-page-conditions' ),
+			'3',
+			'2-5',
+			'4-',
+			'-3'
+		)
 	)
 );
 

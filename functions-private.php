@@ -12,16 +12,18 @@ defined( 'ABSPATH' ) || die();
 /**
  * The selectable paging conditions, keyed by the value stored in post meta.
  *
- * Order is the order they appear in the meta box.
+ * Order is the order they appear in the meta box. These are short radio button
+ * labels, so each carries a translator context: "page" here always means a page
+ * of a paginated archive, and "Pass through" is otherwise wide open.
  *
  * @return array<string, string> Condition value => human readable label.
  */
 function get_condition_labels(): array {
 	return array(
-		CONDITION_DEFAULT        => __( 'Pass through', 'gp-elements-page-conditions' ),
-		CONDITION_ONLY_PAGE_ONE  => __( 'Only show on page one', 'gp-elements-page-conditions' ),
-		CONDITION_NEVER_PAGE_ONE => __( 'Never show on page one', 'gp-elements-page-conditions' ),
-		CONDITION_ONLY_PAGES     => __( 'Only show on pages…', 'gp-elements-page-conditions' ),
+		CONDITION_DEFAULT        => _x( 'Pass through', 'paging condition; apply no page restriction', 'gp-elements-page-conditions' ),
+		CONDITION_ONLY_PAGE_ONE  => _x( 'Only show on page one', 'paging condition', 'gp-elements-page-conditions' ),
+		CONDITION_NEVER_PAGE_ONE => _x( 'Never show on page one', 'paging condition', 'gp-elements-page-conditions' ),
+		CONDITION_ONLY_PAGES     => _x( 'Only show on pages…', 'paging condition; followed by a list of page numbers', 'gp-elements-page-conditions' ),
 	);
 }
 

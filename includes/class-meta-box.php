@@ -23,7 +23,7 @@ class Meta_Box {
 	public function register(): void {
 		add_meta_box(
 			META_BOX_ID,
-			esc_html__( 'Paging Condition', 'gp-elements-page-conditions' ),
+			esc_html_x( 'Paging Condition', 'meta box title; pagination of an archive', 'gp-elements-page-conditions' ),
 			array( $this, 'render' ),
 			ELEMENTS_POST_TYPE,
 			'normal',

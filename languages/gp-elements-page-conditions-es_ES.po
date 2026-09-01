@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GP Elements Page Conditions 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gp-elements-page-conditions\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-01T20:28:38+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: gp-elements-page-conditions\n"
+
+#. Plugin Name of the plugin
+#: gp-elements-page-conditions.php
+msgid "GP Elements Page Conditions"
+msgstr "GP Elements Page Conditions"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: gp-elements-page-conditions.php
+msgid "https://headwall-hosting.com/"
+msgstr "https://headwall-hosting.com/"
+
+#. Description of the plugin
+#: gp-elements-page-conditions.php
+msgid "Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers."
+msgstr "Añade una condición de paginación a GeneratePress Elements, de modo que un elemento pueda mostrarse únicamente en la primera página de una vista paginada, ocultarse en la primera página o limitarse a números de página específicos."
+
+#. Author of the plugin
+#: gp-elements-page-conditions.php
+msgid "Paul Faulkner"
+msgstr "Paul Faulkner"
+
+#: admin-templates/element-meta-box.php:22
+msgid "Applies on top of the display rules above, wherever pagination is in play: term and post type archives, the blog index, search results and multi-page posts."
+msgstr "Se aplica además de las reglas de visualización anteriores, siempre que haya paginación: archivos de términos y tipos de entradas, el índice del blog, los resultados de búsqueda y las entradas de varias páginas."
+
+#: admin-templates/element-meta-box.php:46
+msgctxt "field label; pages of a paginated archive"
+msgid "Page numbers"
+msgstr "Números de página"
+
+#: functions-private.php:23
+msgctxt "paging condition; apply no page restriction"
+msgid "Pass through"
+msgstr "Pasar sin cambios"
+
+#: functions-private.php:24
+msgctxt "paging condition"
+msgid "Only show on page one"
+msgstr "Mostrar solo en la primera página"
+
+#: functions-private.php:25
+msgctxt "paging condition"
+msgid "Never show on page one"
+msgstr "No mostrar nunca en la primera página"
+
+#: functions-private.php:26
+msgctxt "paging condition; followed by a list of page numbers"
+msgid "Only show on pages…"
+msgstr "Mostrar solo en las páginas…"
+
+#: includes/class-meta-box.php:26
+msgctxt "meta box title; pagination of an archive"
+msgid "Paging Condition"
+msgstr "Condición de paginación"
+
+#. translators: 1: this plugin's name, 2: the name of the plugin it depends on
+#: includes/class-plugin.php:99
+#, php-format
+msgid "%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is."
+msgstr "%1$s necesita el módulo «Elements» de %2$s, que no parece estar activo. El complemento no hará nada hasta que lo esté."
+
+#. translators: 1: single page example, 2: closed range example, 3: open range example, 4: open range example. All four are literal syntax and must not be translated.
+#: admin-templates/element-meta-box.php:67
+#, php-format
+msgid "Comma separated. Accepts single pages (%1$s), ranges (%2$s) and open ranges (%3$s for page four onwards, %4$s for up to page three). Leaving this empty passes through."
+msgstr "Separados por comas. Acepta páginas individuales (%1$s), rangos (%2$s) y rangos abiertos (%3$s a partir de la página cuatro, %4$s hasta la página tres). Si se deja vacío, se pasa tal cual."

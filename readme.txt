@@ -33,6 +33,10 @@ The condition is applied on top of the Element's existing display rules - it can
 
 No dependencies beyond GeneratePress Premium. The condition is stored in the `archive_paging_visibility` post meta key (and `archive_paging_pages` for the page list) and applied through GeneratePress Premium's `generate_element_display` filter at priority 20, which covers block, layout, hook and hero Elements alike.
 
+= Translations =
+
+Ships with de_DE, el_GR, en_GB, es_ES, fr_FR, it_IT, nl_NL and pl_PL translations.
+
 == Installation ==
 
 1. Upload the plugin to `/wp-content/plugins/gp-elements-page-conditions/`.

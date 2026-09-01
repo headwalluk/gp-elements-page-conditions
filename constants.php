@@ -60,6 +60,17 @@ const NONCE_FIELD     = 'hwpc_paging_condition_nonce';
 const PAGES_FIELD_ID  = 'hwpc-pages';
 const CONTAINER_CLASS = 'hwpc-paging-condition';
 
+/**
+ * Placeholder shown in the page list field. A format example rather than prose,
+ * so it is deliberately not translatable.
+ */
+const PAGES_FIELD_EXAMPLE = '2-5, 8';
+
+/**
+ * Where the plugin's .po/.mo files live, relative to the plugins directory.
+ */
+const LANGUAGES_PATH = 'languages';
+
 // ============================================================================
 // Page List Parsing
 // ============================================================================

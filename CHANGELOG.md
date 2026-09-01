@@ -36,6 +36,23 @@ filter in `functions.php`.
   `empty( get_the_title( $element_id ) )` as an existence check, so an Element
   with no title quietly opted out of its own condition.
 
+### Internationalisation
+- **Translations for eight locales** — `de_DE`, `el_GR`, `en_GB`, `es_ES`,
+  `fr_FR`, `it_IT`, `nl_NL` and `pl_PL`, generated with
+  [wp-translate](https://github.com/headwalluk/wp-translate-tool). All six short
+  UI labels carry a translator context, since "page", "paging" and "pass
+  through" are all ambiguous out of context.
+- **Page list syntax examples are passed as `printf` placeholders**, so they
+  never reach the translator. DeepL sets ranges with an en dash in German and
+  Polish, which would have documented a format the parser rejects.
+
+### Fixed
+- **Typographic dashes in the page list are now accepted** — `Page_List` folds
+  en dash, em dash, figure dash, non-breaking hyphen, horizontal bar and minus
+  sign to an ASCII hyphen before parsing, and stores the canonical ASCII form.
+  Without this, a range pasted from a word processor or typed from the German or
+  Polish help text was silently discarded.
+
 ### Migration Notes
 - The meta key is unchanged (`archive_paging_visibility`), so existing Elements
   keep their settings. Activate the plugin, then delete the ACF field group and

@@ -45,6 +45,7 @@ class Plugin {
 		$this->paging_condition = new Paging_Condition();
 		$this->admin_hooks      = new Admin_Hooks();
 
+		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'add_meta_boxes_' . ELEMENTS_POST_TYPE, array( $this->meta_box, 'register' ) );
 		add_action( 'save_post_' . ELEMENTS_POST_TYPE, array( $this->meta_box, 'save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this->admin_hooks, 'enqueue_scripts' ), 10, 1 );
@@ -55,6 +56,23 @@ class Plugin {
 			array( $this->paging_condition, 'filter_element_display' ),
 			ELEMENT_DISPLAY_PRIORITY,
 			2
+		);
+	}
+
+	/**
+	 * Load the plugin's bundled translations.
+	 *
+	 * Hooked on `init` rather than `plugins_loaded`: since WordPress 6.7,
+	 * loading a text domain before `init` triggers a _doing_it_wrong() notice.
+	 * Nothing here needs a translated string before then.
+	 *
+	 * @return void
+	 */
+	public function load_textdomain(): void {
+		load_plugin_textdomain(
+			HWPC_NAME,
+			false,
+			trailingslashit( dirname( plugin_basename( HWPC_FILE ) ) ) . LANGUAGES_PATH
 		);
 	}
 
@@ -75,9 +93,13 @@ class Plugin {
 		if ( ! post_type_exists( ELEMENTS_POST_TYPE ) ) {
 			printf(
 				'<div class="notice notice-warning"><p>%s</p></div>',
-				esc_html__(
-					'GP Elements Page Conditions needs the Elements module of GeneratePress Premium, which does not appear to be active. The plugin is doing nothing until it is.',
-					'gp-elements-page-conditions'
+				esc_html(
+					sprintf(
+						/* translators: 1: this plugin's name, 2: the name of the plugin it depends on */
+						__( '%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is.', 'gp-elements-page-conditions' ),
+						'GP Elements Page Conditions',
+						'GeneratePress Premium'
+					)
 				)
 			);
 		}

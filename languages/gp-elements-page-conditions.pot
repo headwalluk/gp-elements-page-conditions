@@ -1,0 +1,82 @@
+# Copyright (C) 2026 Paul Faulkner
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: GP Elements Page Conditions 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gp-elements-page-conditions\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-01T20:31:31+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: gp-elements-page-conditions\n"
+
+#. Plugin Name of the plugin
+#: gp-elements-page-conditions.php
+msgid "GP Elements Page Conditions"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: gp-elements-page-conditions.php
+msgid "https://headwall-hosting.com/"
+msgstr ""
+
+#. Description of the plugin
+#: gp-elements-page-conditions.php
+msgid "Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers."
+msgstr ""
+
+#. Author of the plugin
+#: gp-elements-page-conditions.php
+msgid "Paul Faulkner"
+msgstr ""
+
+#: admin-templates/element-meta-box.php:22
+msgid "Applies on top of the display rules above, wherever pagination is in play: term and post type archives, the blog index, search results and multi-page posts."
+msgstr ""
+
+#: admin-templates/element-meta-box.php:46
+msgctxt "field label; pages of a paginated archive"
+msgid "Page numbers"
+msgstr ""
+
+#. translators: 1: single page example, 2: closed range example, 3: open range example, 4: open range example. All four are literal syntax and must not be translated.
+#: admin-templates/element-meta-box.php:67
+#, php-format
+msgid "Comma separated. Accepts single pages (%1$s), ranges (%2$s) and open ranges (%3$s for page four onwards, %4$s for up to page three). Leaving this empty passes through."
+msgstr ""
+
+#: functions-private.php:23
+msgctxt "paging condition; apply no page restriction"
+msgid "Pass through"
+msgstr ""
+
+#: functions-private.php:24
+msgctxt "paging condition"
+msgid "Only show on page one"
+msgstr ""
+
+#: functions-private.php:25
+msgctxt "paging condition"
+msgid "Never show on page one"
+msgstr ""
+
+#: functions-private.php:26
+msgctxt "paging condition; followed by a list of page numbers"
+msgid "Only show on pages…"
+msgstr ""
+
+#: includes/class-meta-box.php:26
+msgctxt "meta box title; pagination of an archive"
+msgid "Paging Condition"
+msgstr ""
+
+#. translators: 1: this plugin's name, 2: the name of the plugin it depends on
+#: includes/class-plugin.php:99
+#, php-format
+msgid "%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is."
+msgstr ""

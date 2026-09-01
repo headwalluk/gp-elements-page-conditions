@@ -11,6 +11,7 @@
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       gp-elements-page-conditions
+ * Domain Path:       /languages
  *
  * @package HeadwallPageConditions
  */
@@ -20,6 +21,7 @@ defined( 'ABSPATH' ) || die();
 const HWPC_NAME    = 'gp-elements-page-conditions';
 const HWPC_VERSION = '1.0.0';
 
+define( 'HWPC_FILE', __FILE__ );
 define( 'HWPC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'HWPC_URL', plugin_dir_url( __FILE__ ) );
 define( 'HWPC_ADMIN_TEMPLATES_DIR', trailingslashit( HWPC_DIR . 'admin-templates' ) );

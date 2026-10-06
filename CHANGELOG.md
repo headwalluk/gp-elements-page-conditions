@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.1] - 2026-10-06
+
+Re-release of 1.1.0 with no code changes. The `v1.1.0` tag did not trigger the
+release workflow, so 1.1.0 has no GitHub Release; sites on 1.0.0 install 1.1.1
+by hand once.
+
+---
+
 ## [1.1.0] - 2026-10-06
 
 ### Added
@@ -15,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   through the normal WordPress update screens. Release lookups are cached for
   12 hours, failures for one hour, and failures are always written to the PHP
   error log. The `hwpc_updater_enabled` filter turns checks off. Sites on 1.0.0
-  have no updater, so 1.1.0 must be installed by hand once.
+  have no updater, so 1.1.1 must be installed by hand once.
 - **Release pipeline** — pushing a `vX.Y.Z` tag builds the release zip and
   attaches it to a GitHub Release, refusing to build if the plugin header,
   `HWPC_VERSION` and the `readme.txt` stable tag disagree with the tag.

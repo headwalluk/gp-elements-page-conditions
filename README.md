@@ -33,7 +33,7 @@ The condition is applied *on top of* the Element's own display rules — it can 
 
 It needs the Elements module of GeneratePress Premium; without it the plugin is inert and shows an admin notice.
 
-From 1.1.0 the plugin updates itself from GitHub Releases through the normal WordPress update screens. Sites on 1.0.0 need the 1.1.0 zip installed by hand once. To turn update checks off, e.g. on staging:
+From 1.1.0 the plugin updates itself from GitHub Releases through the normal WordPress update screens. Sites on 1.0.0 need the 1.1.1 zip installed by hand once. To turn update checks off, e.g. on staging:
 
 ```php
 add_filter( 'hwpc_updater_enabled', '__return_false' );

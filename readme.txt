@@ -4,7 +4,7 @@ Tags: generatepress, elements, archives, pagination, hero
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,9 @@ No. The condition only ever takes an Element away, so an Element's own display r
 Yes - the meta key is unchanged. Activate the plugin, then remove the ACF field group and the theme filter. Note that the theme version applied to archives only; this plugin also covers the blog index, search results and multi-page posts.
 
 == Changelog ==
+
+= 1.1.1 =
+* Re-release of 1.1.0, whose tag produced no release build.
 
 = 1.1.0 =
 * Added: automatic updates from GitHub Releases.

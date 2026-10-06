@@ -4,7 +4,7 @@ Tags: generatepress, elements, archives, pagination, hero
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,11 +39,13 @@ Ships with de_DE, el_GR, en_GB, es_ES, fr_FR, it_IT, nl_NL and pl_PL translation
 
 == Installation ==
 
-1. Upload the plugin to `/wp-content/plugins/gp-elements-page-conditions/`.
-2. Activate it through the Plugins screen in WordPress.
+1. Download `gp-elements-page-conditions.zip` from the [latest GitHub release](https://github.com/headwalluk/gp-elements-page-conditions/releases/latest).
+2. WordPress admin → Plugins → Add New → Upload Plugin → choose the zip → Install Now → Activate.
 3. Edit any GeneratePress Element and set its condition in the "Paging Condition" box.
 
 The Elements module of GeneratePress Premium must be active. Without it the plugin does nothing and shows an admin notice.
+
+The plugin receives future updates automatically via its bundled GitHub updater. The plugin is not listed on wordpress.org.
 
 == Frequently Asked Questions ==
 
@@ -60,6 +62,10 @@ No. The condition only ever takes an Element away, so an Element's own display r
 Yes - the meta key is unchanged. Activate the plugin, then remove the ACF field group and the theme filter. Note that the theme version applied to archives only; this plugin also covers the blog index, search results and multi-page posts.
 
 == Changelog ==
+
+= 1.1.0 =
+* Added: automatic updates from GitHub Releases.
+* Fixed: an unexpected value (such as null) from another plugin on the GeneratePress display filter could cause a fatal error on the front end.
 
 = 1.0.0 =
 * Initial release.

@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-10-06
+
+### Added
+- **Automatic updates from GitHub Releases** — a bundled updater checks the
+  latest release of `headwalluk/gp-elements-page-conditions` and offers it
+  through the normal WordPress update screens. Release lookups are cached for
+  12 hours, failures for one hour, and failures are always written to the PHP
+  error log. The `hwpc_updater_enabled` filter turns checks off. Sites on 1.0.0
+  have no updater, so 1.1.0 must be installed by hand once.
+- **Release pipeline** — pushing a `vX.Y.Z` tag builds the release zip and
+  attaches it to a GitHub Release, refusing to build if the plugin header,
+  `HWPC_VERSION` and the `readme.txt` stable tag disagree with the tag.
+
+### Fixed
+- **The display filter no longer fatals on an unexpected value** —
+  `filter_element_display()` declared `bool` and `int` parameters, so another
+  callback on `generate_element_display` returning `null` caused a `TypeError` on
+  the front end. Both parameters now take `mixed`; anything that isn't a
+  numeric Element ID passes through untouched. Introduced in 1.0.0.
+
+### Changed
+- `Plugin URI` now points at the GitHub repository.
+
+---
+
 ## [1.0.0] - 2026-09-01
 
 Initial release. Extracted from the `headwall-hosting` child theme, where the

@@ -147,8 +147,7 @@ class Page_List {
 				'last'  => (int) $matches[1],
 			);
 		} else {
-			// Unparseable segment; leave the range null.
-			$range = null;
+			// Unparseable segment; the range stays null.
 		}
 
 		$is_usable_range = null !== $range

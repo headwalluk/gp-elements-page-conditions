@@ -20,17 +20,21 @@ class Paging_Condition {
 	 * Only ever hides an Element that GeneratePress was already going to show;
 	 * an Element excluded by its own display rules stays excluded.
 	 *
-	 * @param bool $is_displayed Whether GeneratePress intends to display the Element.
-	 * @param int  $element_id   The Element post ID.
+	 * @param mixed $is_displayed Whether GeneratePress intends to display the Element.
+	 * @param mixed $element_id   The Element post ID.
 	 *
-	 * @return bool Whether the Element should be displayed.
+	 * @return mixed Whether the Element should be displayed, or $is_displayed
+	 *               unchanged when there is nothing to decide.
 	 */
-	public function filter_element_display( bool $is_displayed, int $element_id ): bool {
+	public function filter_element_display( mixed $is_displayed, mixed $element_id ): mixed {
 		// Short-circuit before reading post meta: GeneratePress has already
-		// excluded this Element, or this is not a request with a page number.
-		if ( ! $is_displayed || ! is_front_end_page_view() ) {
+		// excluded this Element, an earlier callback passed something other than
+		// a post ID, or this is not a request with a page number.
+		if ( ! $is_displayed || ! is_numeric( $element_id ) || ! is_front_end_page_view() ) {
 			return $is_displayed;
 		}
+
+		$element_id = (int) $element_id;
 
 		// CONDITION_DEFAULT, no condition at all, and any value we no longer
 		// recognise all fall through to the display GeneratePress asked for.

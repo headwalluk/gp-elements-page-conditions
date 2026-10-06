@@ -80,3 +80,19 @@ const LANGUAGES_PATH = 'languages';
  * an open range such as "-3".
  */
 const FIRST_PAGE_NUMBER = 1;
+
+// ============================================================================
+// GitHub Updater
+// ============================================================================
+
+const UPDATER_GITHUB_REPO     = 'headwalluk/gp-elements-page-conditions';
+const UPDATER_CACHE_KEY       = 'hwpc_github_release';
+const UPDATER_CACHE_TTL       = 12 * HOUR_IN_SECONDS;
+const UPDATER_REQUEST_TIMEOUT = 10;
+
+/**
+ * Back-off after a failed release lookup, so an unreachable or rate-limiting
+ * API is not re-queried on every update check.
+ */
+const UPDATER_FAILURE_CACHE_KEY = 'hwpc_github_failed';
+const UPDATER_FAILURE_CACHE_TTL = HOUR_IN_SECONDS;

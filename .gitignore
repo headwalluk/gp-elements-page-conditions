@@ -68,3 +68,7 @@ yarn.lock
 .htaccess
 *.zip
 *.tar.gz
+
+# Private development notes. Never published: may contain client site names and
+# unredacted diagnostics.
+dev-notes/

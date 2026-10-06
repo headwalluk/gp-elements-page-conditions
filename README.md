@@ -1,71 +1,28 @@
 # GP Elements Page Conditions
 
-![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759B?logo=wordpress&logoColor=white)
-![GeneratePress](https://img.shields.io/badge/GeneratePress%20Premium-2.0%2B-1e3a8a)
-![PHP](https://img.shields.io/badge/PHP-8.0%2B-777BB4?logo=php&logoColor=white)
-![License](https://img.shields.io/badge/license-GPLv2%20or%20later-blue)
+[![Version](https://img.shields.io/github/v/release/headwalluk/gp-elements-page-conditions?label=version&color=blue)](https://github.com/headwalluk/gp-elements-page-conditions/releases/latest)
+[![GeneratePress Premium](https://img.shields.io/badge/GeneratePress%20Premium-2.0+-1e3a8a.svg)](https://generatepress.com/premium/)
+[![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://www.php.net/)
+[![WordPress](https://img.shields.io/badge/WordPress-6.0+-21759B.svg)](https://wordpress.org/)
+[![License](https://img.shields.io/badge/license-GPL--2.0+-green.svg)](LICENSE)
+[![Coding Standards](https://img.shields.io/badge/WordPress-Coding%20Standards-blue.svg)](https://github.com/WordPress/WordPress-Coding-Standards)
 
-A small WordPress plugin by [Headwall Hosting](https://headwall-hosting.com) that adds a paging condition to GeneratePress Premium Elements.
+Adds a paging condition to GeneratePress Premium Elements.
 
-GeneratePress Elements can target a taxonomy archive, but not a particular *page* of it. This plugin adds a **Paging Condition** meta box to every Element, so page one of an archive can carry a large hero with SEO copy and a featured-post layout, while pages two onwards use a compact hero and a plain list.
+GeneratePress Elements can target an archive, but not a particular *page* of it. This plugin adds a **Paging Condition** box to every Element, so page one of a category can carry a large hero with SEO copy and a featured-post layout, while pages two onwards get a compact hero and a plain list.
 
-## Conditions
+## What it does
 
-| Condition | Behaviour |
-| --- | --- |
-| **Pass through** | No paging condition. The default. |
-| **Only show on page one** | Hidden once the visitor pages past the first page. |
-| **Never show on page one** | Hidden on the first page, shown from page two on. |
-| **Only show on pages…** | Shown only on the page numbers listed. |
+- Four conditions per Element: *Pass through* (the default), *Only show on page one*, *Never show on page one*, and *Only show on pages…* with a list such as `2-5, 8`
+- Works with every Element type — Block, Layout, Hook and Hero
+- Applies wherever WordPress paginates: category, tag and custom post type archives, the blog index, search results and multi-page posts
+- Only ever hides an Element that GeneratePress was already going to show; never reveals one its display rules exclude
+- Updates itself from GitHub Releases through the normal WordPress update screens
+- Translated into German, Greek, British English, Spanish, French, Italian, Dutch and Polish
 
-The page list is comma separated and accepts single pages (`3`), ranges (`2-5`) and open ranges (`4-` for page four onwards, `-3` for up to page three). Unparseable segments are dropped on save, and an empty list passes through rather than hiding the Element everywhere.
+## Documentation
 
-## Where it applies
-
-Anywhere a page number is meaningful: term and post type archives, the blog index, search results, and multi-page single posts split with `<!--nextpage-->`. On any unpaginated view the current page counts as page one.
-
-The condition is applied *on top of* the Element's own display rules — it can only hide an Element that GeneratePress was already going to show, never reveal one that was excluded.
-
-## Installation
-
-1. Download `gp-elements-page-conditions.zip` from the [latest release](https://github.com/headwalluk/gp-elements-page-conditions/releases/latest)
-2. WordPress admin → Plugins → Add New → Upload Plugin → choose the zip → Install Now → Activate
-
-It needs the Elements module of GeneratePress Premium; without it the plugin is inert and shows an admin notice.
-
-From 1.1.0 the plugin updates itself from GitHub Releases through the normal WordPress update screens. Sites on 1.0.0 need the 1.1.1 zip installed by hand once. To turn update checks off, e.g. on staging:
-
-```php
-add_filter( 'hwpc_updater_enabled', '__return_false' );
-```
-
-There is no build step — no npm, no Composer, no bundler.
-
-## Migrating from the ACF implementation
-
-This plugin replaces an ACF field group and a `functions.php` filter previously used on Headwall sites. The meta key is unchanged, so migration is:
-
-1. Activate this plugin.
-2. Delete the ACF field group that provided `archive_paging_visibility`.
-3. Remove the `generate_element_display` filter from the theme.
-
-Existing Elements keep their settings. The one behaviour change is scope: the theme version tested `is_archive()` only, so the blog index and search results were silently excluded. This plugin covers them, which means an Element set to *Never show on page one* with a broad display rule will now also be hidden on unpaginated views, since those count as page one.
-
-## Translations
-
-Ships translations for `de_DE`, `el_GR`, `en_GB`, `es_ES`, `fr_FR`, `it_IT`, `nl_NL` and `pl_PL` in `languages/`, generated by [wp-translate](https://github.com/headwalluk/wp-translate-tool):
-
-```bash
-wp-translate . de_DE,el_GR,en_GB,es_ES,fr_FR,it_IT,nl_NL,pl_PL
-```
-
-The conventions for writing translatable strings in this plugin are in [CLAUDE.md](CLAUDE.md).
-
-## Developer documentation
-
-- [CHANGELOG.md](CHANGELOG.md) — per-version release notes
-- [CLAUDE.md](CLAUDE.md) — architecture, conventions and file layout
-
-## License
-
-Licensed under [GPLv2 or later](LICENSE).
+- [Getting started](docs/getting-started.md) — requirements, installing, updates, and moving over from the old ACF setup
+- [Using paging conditions](docs/using-paging-conditions.md) — for site builders: each condition, the page list format, and common layouts
+- [Developer guide](docs/developers.md) — for developers and contributors: how it works, stored data, testing and releasing
+- [Changelog](CHANGELOG.md)

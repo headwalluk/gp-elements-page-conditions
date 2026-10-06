@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Changed
+- **Documentation moved into `docs/`** — `getting-started.md` for site owners,
+  `using-paging-conditions.md` for site builders and `developers.md` for
+  developers and contributors. `README.md` is now a short summary that links to
+  them.
+- The release workflow checks the plugin header and `HWPC_VERSION` only.
+
+### Removed
+- **`readme.txt`** — the plugin is distributed through GitHub Releases, not
+  wordpress.org, so the file served no purpose and was a third place to keep the
+  version in step.
+
+---
+
 ## [1.1.1] - 2026-10-06
 
 Re-release of 1.1.0 with no code changes. The `v1.1.0` tag did not trigger the

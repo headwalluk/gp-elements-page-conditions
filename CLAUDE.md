@@ -149,19 +149,27 @@ Types: `feat:` `fix:` `refactor:` `chore:` `docs:` `style:` `test:`
 
 1. Update the version in `gp-elements-page-conditions.php` — **both** the `Version:` header and the `HWPC_VERSION` constant
 2. Update `CHANGELOG.md`: move the `[Unreleased]` entries under the new version
-3. Update the `readme.txt` stable tag and its `== Changelog ==`
-4. Run `phpcs`
-5. Tag `vX.Y.Z` and push the tag
+3. Run `phpcs`, commit, and push `main`
+4. Tag `vX.Y.Z` and push the tag on its own
 
-Pushing the tag runs `.github/workflows/release.yml`, which refuses to build unless the header `Version:`, `HWPC_VERSION` and the `readme.txt` stable tag all match the tag. It then builds the zip from the working tree minus `.distignore`, and attaches `gp-elements-page-conditions.zip` and `gp-elements-page-conditions-X.Y.Z.zip` to a new GitHub Release — which is what `Github_Updater` reads.
+Pushing the tag runs `.github/workflows/release.yml`, which refuses to build unless the header `Version:` and `HWPC_VERSION` both match the tag. It then builds the zip from the working tree minus `.distignore`, and attaches `gp-elements-page-conditions.zip` and `gp-elements-page-conditions-X.Y.Z.zip` to a new GitHub Release — which is what `Github_Updater` reads.
 
 **The version must always correspond to a real GitHub Release.** A version ahead of the latest Release makes the updater see nothing new; a header and constant that disagree produce a version-drift error on every check.
 
 ## Reference Files
 
-- `README.md` — what the plugin does, conditions, installation and updates, migration from the ACF version
+`docs/` holds the user-facing documentation, **one audience per document**:
+
+- `docs/getting-started.md` — site owners: requirements, install, updates, uninstalling, moving from the ACF version
+- `docs/using-paging-conditions.md` — site builders: each condition, the page list format, common layouts, troubleshooting
+- `docs/developers.md` — developers and contributors: how it works, stored data, hooks, testing, releasing
+
+Keep them in step with the code: a change to behaviour, stored data, a hook or the release process updates the matching doc in the same commit. Rationale too long for a code comment goes in `docs/developers.md`.
+
+- `README.md` — badges, a short summary, and links into `docs/`. Keep it lean
 - `CHANGELOG.md` — per-version release notes
-- `readme.txt` — WordPress plugin header readme
+
+There is no `readme.txt`: the plugin is distributed through GitHub Releases, not wordpress.org.
 - `.distignore` — what is left out of the release zip
 
 <!-- wp-translate:begin v=1.2.0 hash=2ec561ecf0308d85e8424ce1a54e396c6d74d14223621c8a9e5ac21f5d66efa2 -->

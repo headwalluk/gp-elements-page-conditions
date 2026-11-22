@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name:       GP Elements Page Conditions
- * Plugin URI:        https://github.com/headwalluk/gp-elements-page-conditions
+ * Plugin URI:        https://headwall-hosting.com/plugins/gp-elements-page-conditions/
  * Description:       Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers.
  * Version:           1.1.1
- * Requires at least: 6.0
- * Requires PHP:      8.0
+ * Requires at least: 6.9
+ * Requires PHP:      8.2
  * Author:            Paul Faulkner
- * Author URI:        https://headwall-hosting.com/
+ * Author URI:        https://headwall-hosting.com/a-web-guys-blog/
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       gp-elements-page-conditions
@@ -43,7 +43,7 @@ require_once HWPC_DIR . 'includes/class-plugin.php';
 // GitHub updates are only checked from admin, cron and WP-CLI requests.
 if ( is_admin() || ( defined( 'DOING_CRON' ) && DOING_CRON ) || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 	require_once HWPC_DIR . 'includes/class-github-updater.php';
-	new Headwall_Page_Conditions\Github_Updater();
+	new Headwall_Page_Conditions\Github_Updater( HWPC_FILE, Headwall_Page_Conditions\UPDATER_GITHUB_REPO, HWPC_VERSION, Headwall_Page_Conditions\UPDATER_ENABLED_FILTER );
 }
 
 /**
@@ -54,7 +54,7 @@ if ( is_admin() || ( defined( 'DOING_CRON' ) && DOING_CRON ) || ( defined( 'WP_C
 function hwpc_plugin_run(): void {
 	global $hwpc_plugin;
 
-	$hwpc_plugin = new Headwall_Page_Conditions\Plugin();
+	$hwpc_plugin = Headwall_Page_Conditions\Plugin::instance();
 	$hwpc_plugin->run();
 }
 hwpc_plugin_run();

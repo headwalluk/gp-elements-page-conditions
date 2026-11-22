@@ -15,10 +15,7 @@ defined( 'ABSPATH' ) || die();
 class Paging_Condition {
 
 	/**
-	 * Filter handler for GeneratePress Premium's element display decision.
-	 *
-	 * Only ever hides an Element that GeneratePress was already going to show;
-	 * an Element excluded by its own display rules stays excluded.
+	 * Hide an Element GeneratePress would show, when its paging condition says so.
 	 *
 	 * @param mixed $is_displayed Whether GeneratePress intends to display the Element.
 	 * @param mixed $element_id   The Element post ID.

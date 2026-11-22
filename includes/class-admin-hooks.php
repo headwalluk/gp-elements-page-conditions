@@ -15,19 +15,16 @@ defined( 'ABSPATH' ) || die();
 class Admin_Hooks {
 
 	/**
-	 * Enqueue our admin area assets.
+	 * Enqueue the admin CSS and JS, on the Element edit screen only.
 	 *
-	 * Only the Element edit screen carries our meta box, so nothing else needs
-	 * to pay for the CSS or JS.
-	 *
-	 * @param string $current_page The current admin area page.
+	 * @param mixed $current_page The current admin area page.
 	 *
 	 * @return void
 	 */
-	public function enqueue_scripts( string $current_page ): void {
+	public function enqueue_scripts( mixed $current_page ): void {
 		$is_edit_screen            = in_array( $current_page, array( 'post.php', 'post-new.php' ), true );
 		$current_screen            = $is_edit_screen ? get_current_screen() : null;
-		$are_admin_assets_required = null !== $current_screen && ELEMENTS_POST_TYPE === $current_screen->post_type;
+		$are_admin_assets_required = $current_screen instanceof \WP_Screen && ELEMENTS_POST_TYPE === $current_screen->post_type;
 
 		if ( $are_admin_assets_required ) {
 			wp_enqueue_style(

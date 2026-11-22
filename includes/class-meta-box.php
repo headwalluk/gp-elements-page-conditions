@@ -16,6 +16,81 @@ defined( 'ABSPATH' ) || die();
 class Meta_Box {
 
 	/**
+	 * Register the paging meta, so every write path runs through the sanitisers.
+	 *
+	 * @return void
+	 */
+	public function register_meta(): void {
+		register_post_meta(
+			ELEMENTS_POST_TYPE,
+			META_CONDITION,
+			array(
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => false,
+				'sanitize_callback' => array( $this, 'sanitise_condition' ),
+				'auth_callback'     => array( $this, 'can_edit_meta' ),
+			)
+		);
+
+		register_post_meta(
+			ELEMENTS_POST_TYPE,
+			META_PAGES,
+			array(
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => false,
+				'sanitize_callback' => array( $this, 'sanitise_pages' ),
+				'auth_callback'     => array( $this, 'can_edit_meta' ),
+			)
+		);
+	}
+
+	/**
+	 * Sanitise a stored paging condition, reducing anything unknown to an empty string.
+	 *
+	 * @param mixed $condition The value being written.
+	 *
+	 * @return string A known condition, or an empty string.
+	 */
+	public function sanitise_condition( mixed $condition ): string {
+		$sanitised = '';
+
+		if ( is_known_condition( $condition ) && CONDITION_DEFAULT !== $condition ) {
+			$sanitised = $condition;
+		}
+
+		return $sanitised;
+	}
+
+	/**
+	 * Sanitise a stored page list, dropping anything unparseable.
+	 *
+	 * @param mixed $pages The value being written.
+	 *
+	 * @return string The valid segments, comma separated.
+	 */
+	public function sanitise_pages( mixed $pages ): string {
+		return is_string( $pages ) ? Page_List::sanitise( $pages ) : '';
+	}
+
+	/**
+	 * Whether the user may edit the paging meta on this Element.
+	 *
+	 * @param mixed $is_allowed Whether core would allow the edit.
+	 * @param mixed $meta_key   The meta key being edited.
+	 * @param mixed $element_id The Element post ID.
+	 * @param mixed $user_id    The user making the edit.
+	 *
+	 * @return bool
+	 */
+	public function can_edit_meta( mixed $is_allowed, mixed $meta_key, mixed $element_id, mixed $user_id ): bool { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- Required by the auth_callback signature.
+		return is_numeric( $element_id )
+			&& is_numeric( $user_id )
+			&& user_can( (int) $user_id, 'edit_post', (int) $element_id );
+	}
+
+	/**
 	 * Register the meta box on the Element edit screen.
 	 *
 	 * @return void
@@ -54,15 +129,17 @@ class Meta_Box {
 	/**
 	 * Persist the meta box values.
 	 *
-	 * @param int $element_id The Element being saved.
+	 * @param mixed $element_id The Element being saved.
 	 *
 	 * @return void
 	 */
-	public function save( int $element_id ): void {
+	public function save( mixed $element_id ): void {
 		// Security and performance short-circuits, before touching any input.
-		if ( ! $this->is_our_save_request( $element_id ) ) {
+		if ( ! is_numeric( $element_id ) || ! $this->is_our_save_request( (int) $element_id ) ) {
 			return;
 		}
+
+		$element_id = (int) $element_id;
 
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- Nonce verified in is_our_save_request().
 		$submitted_condition = isset( $_POST[ META_CONDITION ] )
@@ -94,7 +171,9 @@ class Meta_Box {
 			? sanitize_text_field( wp_unslash( $_POST[ NONCE_FIELD ] ) )
 			: '';
 
-		$is_autosave = defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE;
+		$is_autosave = ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			|| false !== wp_is_post_autosave( $element_id )
+			|| false !== wp_is_post_revision( $element_id );
 
 		return ! $is_autosave
 			&& wp_verify_nonce( $nonce, NONCE_ACTION )
@@ -103,10 +182,6 @@ class Meta_Box {
 
 	/**
 	 * Write a meta value, deleting the row outright when the value is empty.
-	 *
-	 * Keeps Elements using the default free of our meta, so an Element that has
-	 * never been given a paging condition looks the same as one that has had it
-	 * cleared.
 	 *
 	 * @param int    $element_id The Element post ID.
 	 * @param string $meta_key   The meta key to write.

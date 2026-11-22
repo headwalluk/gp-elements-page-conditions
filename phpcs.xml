@@ -10,6 +10,7 @@
 	<exclude-pattern>*/assets/*</exclude-pattern>
 	<exclude-pattern>*/.git/*</exclude-pattern>
 	<exclude-pattern>*/dev-notes/*</exclude-pattern>
+	<exclude-pattern>*/code-analysis/*</exclude-pattern>
 	<exclude-pattern>*/docs/*</exclude-pattern>
 
 	<!-- Arguments -->
@@ -18,6 +19,9 @@
 	<arg name="colors"/>
 	<arg name="extensions" value="php"/>
 	<arg name="parallel" value="8"/>
+
+	<!-- The plugin's WordPress floor. WPCS 3 assumes 6.2 without it. -->
+	<config name="minimum_wp_version" value="6.9"/>
 
 	<!-- Rules -->
 	<rule ref="WordPress">

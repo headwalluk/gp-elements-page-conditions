@@ -11,30 +11,14 @@ defined( 'ABSPATH' ) || die();
 
 /**
  * Parses the comma separated page list used by the "Only show on pages…"
- * condition.
- *
- * Each comma separated segment is one of:
- *
- *   3    a single page
- *   2-5  a closed range
- *   4-   an open range, page four onwards
- *   -3   an open range, up to and including page three
- *
- * Anything else, including a reversed range such as "5-2", is discarded.
- *
- * Typographic dashes are folded to an ASCII hyphen before parsing. German and
- * Polish set ranges with an en dash, so the translated help text for this field
- * says to type "2–5"; word processors and browsers autocorrect hyphens the same
- * way. Without the fold, a segment copied from any of those is silently dropped.
+ * condition: single pages (3), closed ranges (2-5) and open ranges (4-, -3).
+ * Anything else, a reversed range included, is discarded. The format and the
+ * dash folding are described in docs/developers/how-it-works.md.
  */
 class Page_List {
 
 	/**
 	 * Normalise a user-entered page list, dropping anything unparseable.
-	 *
-	 * Used on save so that only meaningful segments are ever stored, and at
-	 * display time to tell a list that means nothing from one that is simply
-	 * empty.
 	 *
 	 * @param string $raw_list Raw page list, e.g. "2-5, 8".
 	 *

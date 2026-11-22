@@ -10,6 +10,15 @@ namespace Headwall_Page_Conditions;
 defined( 'ABSPATH' ) || die();
 
 // ============================================================================
+// Plugin
+// ============================================================================
+
+/**
+ * The plugin's name, passed into UI strings as a placeholder so it is never translated.
+ */
+const PLUGIN_NAME = 'GP Elements Page Conditions';
+
+// ============================================================================
 // GeneratePress Premium Integration
 // ============================================================================
 
@@ -35,8 +44,7 @@ const ELEMENT_DISPLAY_PRIORITY = 20;
 // ============================================================================
 
 /**
- * Deliberately matches the keys used by the ACF implementation this plugin
- * replaces, so existing Elements keep working without a migration.
+ * The legacy ACF key strings, kept exactly (docs/developers/how-it-works.md, Stored data).
  */
 const META_CONDITION = 'archive_paging_visibility';
 const META_PAGES     = 'archive_paging_pages';
@@ -61,8 +69,7 @@ const PAGES_FIELD_ID  = 'hwpc-pages';
 const CONTAINER_CLASS = 'hwpc-paging-condition';
 
 /**
- * Placeholder shown in the page list field. A format example rather than prose,
- * so it is deliberately not translatable.
+ * Placeholder shown in the page list field. Literal syntax, so not translatable.
  */
 const PAGES_FIELD_EXAMPLE = '2-5, 8';
 
@@ -85,14 +92,5 @@ const FIRST_PAGE_NUMBER = 1;
 // GitHub Updater
 // ============================================================================
 
-const UPDATER_GITHUB_REPO     = 'headwalluk/gp-elements-page-conditions';
-const UPDATER_CACHE_KEY       = 'hwpc_github_release';
-const UPDATER_CACHE_TTL       = 12 * HOUR_IN_SECONDS;
-const UPDATER_REQUEST_TIMEOUT = 10;
-
-/**
- * Back-off after a failed release lookup, so an unreachable or rate-limiting
- * API is not re-queried on every update check.
- */
-const UPDATER_FAILURE_CACHE_KEY = 'hwpc_github_failed';
-const UPDATER_FAILURE_CACHE_TTL = HOUR_IN_SECONDS;
+const UPDATER_GITHUB_REPO    = 'headwalluk/gp-elements-page-conditions';
+const UPDATER_ENABLED_FILTER = 'hwpc_updater_enabled';

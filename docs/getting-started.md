@@ -2,8 +2,8 @@
 
 ## Requirements
 
-- WordPress 6.0 or later
-- PHP 8.0 or later
+- WordPress 6.9 or later
+- PHP 8.2 or later
 - GeneratePress Premium 2.0 or later, with the **Elements** module switched on (Appearance → GeneratePress → Elements)
 
 Without the Elements module the plugin does nothing, and shows an admin notice saying so to anyone who can activate plugins.
@@ -22,6 +22,8 @@ The plugin is not on wordpress.org, so always install from the GitHub release zi
 
 From version 1.1.0 the plugin checks GitHub for new releases and offers them on the normal Dashboard → Updates screen, like any other plugin. It checks at most every 12 hours, and backs off for an hour if GitHub can't be reached.
 
+Version 2.0.0 raised the requirements to WordPress 6.9 and PHP 8.2. On an older site the update is still listed, but WordPress refuses to install it, naming the version it needs. Stay on 1.1.1 until the site or server is upgraded.
+
 Sites still on **1.0.0** have no updater. Install the latest release zip by hand once — WordPress offers to replace the existing copy — and updates are automatic from then on.
 
 To turn update checks off, for example on a staging site or to hold a site on its current version, add this to a site-specific plugin or the child theme's `functions.php`:
@@ -32,7 +34,7 @@ add_filter( 'hwpc_updater_enabled', '__return_false' );
 
 ## Uninstalling
 
-Deleting the plugin leaves each Element's stored condition in place, so reinstalling brings the settings back. With the plugin gone the conditions are simply ignored, and every Element shows according to its GeneratePress display rules alone.
+Deleting the plugin leaves each Element's stored condition in place, so reinstalling brings the settings back. Only the cached update check is removed. With the plugin gone the conditions are simply ignored, and every Element shows according to its GeneratePress display rules alone.
 
 ## Moving from the ACF version
 

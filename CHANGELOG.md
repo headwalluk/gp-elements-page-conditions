@@ -9,11 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [2.0.0] - 2026-11-22
+
+**Breaking: requires WordPress 6.9 and PHP 8.2** (previously 6.0 and 8.0). Sites
+below either stay on 1.1.1; WordPress refuses the update until the site or
+server is upgraded.
+
+### Added
+- **The paging meta keys are registered** with `register_post_meta()`, so a write
+  from the Custom Fields box goes through the same sanitisers as the Paging
+  Condition box: an unknown condition is blanked, an unparseable page list
+  segment dropped, and editing needs `edit_post` on the Element. Neither key is
+  exposed over REST.
+- **`uninstall.php`** — deletes the updater's cached release lookup. Element
+  meta is kept, as before.
+
 ### Changed
+- **Minimum WordPress raised to 6.9 and PHP to 8.2.**
+- **GitHub updater replaced with the shared Headwall updater.** The
+  `hwpc_updater_enabled` filter is unchanged. Its cache transients are now
+  named `gp_elements_page_conditions_github_release` and
+  `gp_elements_page_conditions_github_failed`; the old `hwpc_github_*` ones
+  expire on their own.
+- The meta box save also skips autosaves and revisions detected by
+  `wp_is_post_autosave()` and `wp_is_post_revision()`, and the save and asset
+  callbacks tolerate a non-numeric post ID or a missing screen.
+- `Plugin URI` now points at the plugin's page on headwall-hosting.com.
 - **Documentation moved into `docs/`** — `getting-started.md` for site owners,
-  `using-paging-conditions.md` for site builders and `developers.md` for
-  developers and contributors. `README.md` is now a short summary that links to
-  them.
+  `using-paging-conditions.md` for site builders, and `developers/` for
+  developers (`how-it-works.md`, `hooks-and-filters.md`), indexed by
+  `docs/README.md`. `README.md` is now a short introduction that links to them.
 - The release workflow checks the plugin header and `HWPC_VERSION` only.
 
 ### Removed

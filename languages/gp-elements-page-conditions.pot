@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: GP Elements Page Conditions 1.0.0\n"
+"Project-Id-Version: GP Elements Page Conditions 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gp-elements-page-conditions\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-01T20:31:31+00:00\n"
+"POT-Creation-Date: 2026-11-22T21:12:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: gp-elements-page-conditions\n"
@@ -20,9 +20,8 @@ msgid "GP Elements Page Conditions"
 msgstr ""
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
 #: gp-elements-page-conditions.php
-msgid "https://headwall-hosting.com/"
+msgid "https://headwall-hosting.com/plugins/gp-elements-page-conditions/"
 msgstr ""
 
 #. Description of the plugin
@@ -33,6 +32,11 @@ msgstr ""
 #. Author of the plugin
 #: gp-elements-page-conditions.php
 msgid "Paul Faulkner"
+msgstr ""
+
+#. Author URI of the plugin
+#: gp-elements-page-conditions.php
+msgid "https://headwall-hosting.com/a-web-guys-blog/"
 msgstr ""
 
 #: admin-templates/element-meta-box.php:22
@@ -70,13 +74,13 @@ msgctxt "paging condition; followed by a list of page numbers"
 msgid "Only show on pages…"
 msgstr ""
 
-#: includes/class-meta-box.php:26
+#: includes/class-meta-box.php:101
 msgctxt "meta box title; pagination of an archive"
 msgid "Paging Condition"
 msgstr ""
 
 #. translators: 1: this plugin's name, 2: the name of the plugin it depends on
-#: includes/class-plugin.php:99
+#: includes/class-plugin.php:148
 #, php-format
 msgid "%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is."
 msgstr ""

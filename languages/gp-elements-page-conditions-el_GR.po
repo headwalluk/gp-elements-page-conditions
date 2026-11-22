@@ -19,12 +19,6 @@ msgstr ""
 msgid "GP Elements Page Conditions"
 msgstr "GP Elements Page Conditions"
 
-#. Plugin URI of the plugin
-#. Author URI of the plugin
-#: gp-elements-page-conditions.php
-msgid "https://headwall-hosting.com/"
-msgstr "https://headwall-hosting.com/"
-
 #. Description of the plugin
 #: gp-elements-page-conditions.php
 msgid "Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers."
@@ -64,13 +58,13 @@ msgctxt "paging condition; followed by a list of page numbers"
 msgid "Only show on pages…"
 msgstr "Εμφάνιση μόνο στις σελίδες…"
 
-#: includes/class-meta-box.php:26
+#: includes/class-meta-box.php:101
 msgctxt "meta box title; pagination of an archive"
 msgid "Paging Condition"
 msgstr "Συνθήκες σελιδοποίησης"
 
 #. translators: 1: this plugin's name, 2: the name of the plugin it depends on
-#: includes/class-plugin.php:99
+#: includes/class-plugin.php:148
 #, php-format
 msgid "%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is."
 msgstr "Το %1$s χρειάζεται τη λειτουργική μονάδα Elements του %2$s, η οποία δεν φαίνεται να είναι ενεργή. Το πρόσθετο δεν εκτελεί καμία ενέργεια έως ότου ενεργοποιηθεί."
@@ -80,3 +74,13 @@ msgstr "Το %1$s χρειάζεται τη λειτουργική μονάδα 
 #, php-format
 msgid "Comma separated. Accepts single pages (%1$s), ranges (%2$s) and open ranges (%3$s for page four onwards, %4$s for up to page three). Leaving this empty passes through."
 msgstr "Διαχωρισμένα με κόμμα. Δέχεται μεμονωμένες σελίδες (%1$s), εύρη (%2$s) και ανοιχτά εύρη (%3$s για τη σελίδα τέσσερα και μετά, %4$s για έως και τη σελίδα τρία). Αν αφεθεί κενό, μεταβιβάζεται ως έχει."
+
+#. Plugin URI of the plugin
+#: gp-elements-page-conditions.php
+msgid "https://headwall-hosting.com/plugins/gp-elements-page-conditions/"
+msgstr "https://headwall-hosting.com/plugins/gp-elements-page-conditions/"
+
+#. Author URI of the plugin
+#: gp-elements-page-conditions.php
+msgid "https://headwall-hosting.com/a-web-guys-blog/"
+msgstr "https://headwall-hosting.com/a-web-guys-blog/"

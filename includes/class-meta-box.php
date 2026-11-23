@@ -98,7 +98,7 @@ class Meta_Box {
 	public function register(): void {
 		add_meta_box(
 			META_BOX_ID,
-			esc_html_x( 'Paging Condition', 'meta box title; pagination of an archive', 'gp-elements-page-conditions' ),
+			esc_html_x( 'Page Conditions', 'meta box title; extra rules for which pages an Element shows on', 'gp-elements-page-conditions' ),
 			array( $this, 'render' ),
 			ELEMENTS_POST_TYPE,
 			'normal',
@@ -115,14 +115,17 @@ class Meta_Box {
 	 * @return void
 	 */
 	public function render( \WP_Post $element ): void {
-		$current_condition = get_post_meta( $element->ID, META_CONDITION, true );
-		$current_pages     = (string) get_post_meta( $element->ID, META_PAGES, true );
+		$current_condition   = get_post_meta( $element->ID, META_CONDITION, true );
+		$current_pages       = (string) get_post_meta( $element->ID, META_PAGES, true );
+		$stored_prefixes     = get_post_meta( $element->ID, META_PATH_PREFIXES, true );
+		$current_prefixes    = is_string( $stored_prefixes ) ? $stored_prefixes : '';
+		$is_plain_permalinks = '' === (string) get_option( 'permalink_structure' );
 
 		if ( ! is_known_condition( $current_condition ) ) {
 			$current_condition = CONDITION_DEFAULT;
 		}
 
-		// Template variables: $current_condition, $current_pages.
+		// The template reads these values by name; its docblock lists them.
 		include HWPC_ADMIN_TEMPLATES_DIR . 'element-meta-box.php';
 	}
 
@@ -149,6 +152,11 @@ class Meta_Box {
 		$submitted_pages = isset( $_POST[ META_PAGES ] )
 			? sanitize_text_field( wp_unslash( $_POST[ META_PAGES ] ) )
 			: '';
+
+		// Decoded first: sanitize_text_field() strips percent-encoded octets, which would mangle non-ASCII slugs.
+		$submitted_prefixes = isset( $_POST[ META_PATH_PREFIXES ] )
+			? sanitize_text_field( rawurldecode( wp_unslash( $_POST[ META_PATH_PREFIXES ] ) ) ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitize_text_field() runs on the decoded value, then Path_List::sanitise().
+			: '';
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 		if ( ! is_known_condition( $submitted_condition ) ) {
@@ -157,6 +165,18 @@ class Meta_Box {
 
 		$this->store_meta( $element_id, META_CONDITION, CONDITION_DEFAULT === $submitted_condition ? '' : $submitted_condition );
 		$this->store_meta( $element_id, META_PAGES, Page_List::sanitise( $submitted_pages ) );
+		$this->store_meta( $element_id, META_PATH_PREFIXES, Path_List::sanitise( $submitted_prefixes, $this->get_home_path() ) );
+	}
+
+	/**
+	 * The path of the site's home URL, "/" unless WordPress is in a subdirectory.
+	 *
+	 * @return string
+	 */
+	private function get_home_path(): string {
+		$home_path = wp_parse_url( home_url( '/' ), PHP_URL_PATH );
+
+		return is_string( $home_path ) ? $home_path : '/';
 	}
 
 	/**

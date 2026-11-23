@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       GP Elements Page Conditions
  * Plugin URI:        https://headwall-hosting.com/plugins/gp-elements-page-conditions/
- * Description:       Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers.
+ * Description:       Adds paging and URL path conditions to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, limited to specific page numbers, or limited to one section of a site.
  * Version:           2.0.0
  * Requires at least: 6.9
  * Requires PHP:      8.2
@@ -35,6 +35,8 @@ require_once HWPC_DIR . 'functions-private.php';
 // Load plugin classes.
 require_once HWPC_DIR . 'includes/class-page-list.php';
 require_once HWPC_DIR . 'includes/class-paging-condition.php';
+require_once HWPC_DIR . 'includes/class-path-list.php';
+require_once HWPC_DIR . 'includes/class-path-condition.php';
 require_once HWPC_DIR . 'includes/class-meta-box.php';
 require_once HWPC_DIR . 'includes/class-admin-hooks.php';
 

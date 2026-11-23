@@ -26,3 +26,23 @@
 	display: block;
 	margin-top: 4px;
 }
+
+.hwpc-paging-condition .hwpc-section-title {
+	margin: 20px 0 8px;
+	font-size: 14px;
+}
+
+.hwpc-paging-condition .hwpc-section-title:first-of-type {
+	margin-top: 0;
+}
+
+.hwpc-paging-condition .hwpc-path label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.hwpc-paging-condition .hwpc-path .description {
+	display: block;
+	margin-top: 4px;
+}

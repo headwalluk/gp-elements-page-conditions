@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-22T21:12:24+00:00\n"
+"POT-Creation-Date: 2026-11-23T10:07:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: gp-elements-page-conditions\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: gp-elements-page-conditions.php
-msgid "Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers."
+msgid "Adds paging and URL path conditions to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, limited to specific page numbers, or limited to one section of a site."
 msgstr ""
 
 #. Author of the plugin
@@ -39,19 +39,52 @@ msgstr ""
 msgid "https://headwall-hosting.com/a-web-guys-blog/"
 msgstr ""
 
-#: admin-templates/element-meta-box.php:22
+#: admin-templates/element-meta-box.php:24
+msgctxt "meta box section heading; pagination of an archive"
+msgid "Paging"
+msgstr ""
+
+#: admin-templates/element-meta-box.php:29
 msgid "Applies on top of the display rules above, wherever pagination is in play: term and post type archives, the blog index, search results and multi-page posts."
 msgstr ""
 
-#: admin-templates/element-meta-box.php:46
+#: admin-templates/element-meta-box.php:53
 msgctxt "field label; pages of a paginated archive"
 msgid "Page numbers"
 msgstr ""
 
 #. translators: 1: single page example, 2: closed range example, 3: open range example, 4: open range example. All four are literal syntax and must not be translated.
-#: admin-templates/element-meta-box.php:67
+#: admin-templates/element-meta-box.php:74
 #, php-format
 msgid "Comma separated. Accepts single pages (%1$s), ranges (%2$s) and open ranges (%3$s for page four onwards, %4$s for up to page three). Leaving this empty passes through."
+msgstr ""
+
+#: admin-templates/element-meta-box.php:87
+msgctxt "meta box section heading; the path part of a web address"
+msgid "URL path"
+msgstr ""
+
+#: admin-templates/element-meta-box.php:92
+msgid "Shows this Element only where the page address starts with one of these paths. This can narrow the display rules but never add pages to them, so the display rules must already include every page in the section. For a whole section, set the Location to all pages and let the URL path narrow it down."
+msgstr ""
+
+#: admin-templates/element-meta-box.php:101
+msgid "This site uses plain permalinks, so page addresses have no path to match and a URL path here hides the Element everywhere."
+msgstr ""
+
+#: admin-templates/element-meta-box.php:103
+msgid "Change the permalink structure"
+msgstr ""
+
+#: admin-templates/element-meta-box.php:112
+msgctxt "field label; the path part of a web address"
+msgid "URL path starts with"
+msgstr ""
+
+#. translators: 1: an example URL path, 2: a URL path below the first. Both are literal paths and must not be translated.
+#: admin-templates/element-meta-box.php:128
+#, php-format
+msgid "Separate paths with commas. Each path is relative to the site address and covers everything below it, so %1$s also covers %2$s. Leave this empty to show the Element on every path."
 msgstr ""
 
 #: functions-private.php:23
@@ -75,12 +108,12 @@ msgid "Only show on pages…"
 msgstr ""
 
 #: includes/class-meta-box.php:101
-msgctxt "meta box title; pagination of an archive"
-msgid "Paging Condition"
+msgctxt "meta box title; extra rules for which pages an Element shows on"
+msgid "Page Conditions"
 msgstr ""
 
 #. translators: 1: this plugin's name, 2: the name of the plugin it depends on
-#: includes/class-plugin.php:148
+#: includes/class-plugin.php:175
 #, php-format
 msgid "%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is."
 msgstr ""

@@ -19,21 +19,16 @@ msgstr ""
 msgid "GP Elements Page Conditions"
 msgstr "GP Elements Page Conditions"
 
-#. Description of the plugin
-#: gp-elements-page-conditions.php
-msgid "Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers."
-msgstr "Voegt een pagineringvoorwaarde toe aan GeneratePress Elements, zodat een Element alleen op pagina één van een gepagineerde weergave kan worden weergegeven, op pagina één kan worden verborgen of kan worden beperkt tot specifieke paginanummers."
-
 #. Author of the plugin
 #: gp-elements-page-conditions.php
 msgid "Paul Faulkner"
 msgstr "Paul Faulkner"
 
-#: admin-templates/element-meta-box.php:22
+#: admin-templates/element-meta-box.php:29
 msgid "Applies on top of the display rules above, wherever pagination is in play: term and post type archives, the blog index, search results and multi-page posts."
 msgstr "Dit geldt bovenop de bovenstaande weergaveregels, overal waar paginering wordt toegepast: archieven van termen en berichttypen, de blogindex, zoekresultaten en berichten die uit meerdere pagina’s bestaan."
 
-#: admin-templates/element-meta-box.php:46
+#: admin-templates/element-meta-box.php:53
 msgctxt "field label; pages of a paginated archive"
 msgid "Page numbers"
 msgstr "Paginanummers"
@@ -58,19 +53,14 @@ msgctxt "paging condition; followed by a list of page numbers"
 msgid "Only show on pages…"
 msgstr "Alleen weergeven op pagina’s…"
 
-#: includes/class-meta-box.php:101
-msgctxt "meta box title; pagination of an archive"
-msgid "Paging Condition"
-msgstr "Voorwaarde voor paginering"
-
 #. translators: 1: this plugin's name, 2: the name of the plugin it depends on
-#: includes/class-plugin.php:148
+#: includes/class-plugin.php:175
 #, php-format
 msgid "%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is."
 msgstr "%1$s heeft de module 'Elements' van %2$s nodig, die niet actief lijkt te zijn. De plug-in doet niets totdat deze wel actief is."
 
 #. translators: 1: single page example, 2: closed range example, 3: open range example, 4: open range example. All four are literal syntax and must not be translated.
-#: admin-templates/element-meta-box.php:67
+#: admin-templates/element-meta-box.php:74
 #, php-format
 msgid "Comma separated. Accepts single pages (%1$s), ranges (%2$s) and open ranges (%3$s for page four onwards, %4$s for up to page three). Leaving this empty passes through."
 msgstr "Gescheiden door komma's. Ondersteunt afzonderlijke pagina's (%1$s), reeksen (%2$s) en open reeksen (%3$s vanaf pagina vier, %4$s tot en met pagina drie). Als dit veld leeg wordt gelaten, wordt het doorgegeven."
@@ -84,3 +74,46 @@ msgstr "https://headwall-hosting.com/plugins/gp-elements-page-conditions/"
 #: gp-elements-page-conditions.php
 msgid "https://headwall-hosting.com/a-web-guys-blog/"
 msgstr "https://headwall-hosting.com/a-web-guys-blog/"
+
+#: admin-templates/element-meta-box.php:24
+msgctxt "meta box section heading; pagination of an archive"
+msgid "Paging"
+msgstr "Paginering"
+
+#: admin-templates/element-meta-box.php:87
+msgctxt "meta box section heading; the path part of a web address"
+msgid "URL path"
+msgstr "URL-pad"
+
+#: admin-templates/element-meta-box.php:101
+msgid "This site uses plain permalinks, so page addresses have no path to match and a URL path here hides the Element everywhere."
+msgstr "Deze site maakt gebruik van eenvoudige permalinks, waardoor pagina-adressen geen pad bevatten waarmee ze kunnen worden gekoppeld en een URL-pad hier het element overal verbergt."
+
+#: admin-templates/element-meta-box.php:103
+msgid "Change the permalink structure"
+msgstr "De permalinkstructuur wijzigen"
+
+#: admin-templates/element-meta-box.php:112
+msgctxt "field label; the path part of a web address"
+msgid "URL path starts with"
+msgstr "Het pad van een URL begint met"
+
+#: includes/class-meta-box.php:101
+msgctxt "meta box title; extra rules for which pages an Element shows on"
+msgid "Page Conditions"
+msgstr "Pagina-voorwaarden"
+
+#. translators: 1: an example URL path, 2: a URL path below the first. Both are literal paths and must not be translated.
+#: admin-templates/element-meta-box.php:128
+#, php-format
+msgid "Separate paths with commas. Each path is relative to the site address and covers everything below it, so %1$s also covers %2$s. Leave this empty to show the Element on every path."
+msgstr "Scheid paden met komma's. Elk pad is relatief ten opzichte van het adres van de site en omvat alles daaronder, dus %1$s omvat ook %2$s. Laat dit veld leeg om het element op elk pad weer te geven."
+
+#. Description of the plugin
+#: gp-elements-page-conditions.php
+msgid "Adds paging and URL path conditions to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, limited to specific page numbers, or limited to one section of a site."
+msgstr "Voegt paginering en URL-padvoorwaarden toe aan GeneratePress Elements, zodat een element alleen op pagina één van een gepagineerde weergave kan worden weergegeven, op pagina één kan worden verborgen, kan worden beperkt tot specifieke paginanummers of kan worden beperkt tot één sectie van een website."
+
+#: admin-templates/element-meta-box.php:92
+msgid "Shows this Element only where the page address starts with one of these paths. This can narrow the display rules but never add pages to them, so the display rules must already include every page in the section. For a whole section, set the Location to all pages and let the URL path narrow it down."
+msgstr "Dit element wordt alleen weergegeven als het pagina-adres begint met een van deze paden. Hiermee kun je de weergaveregels beperken, maar er nooit pagina’s aan toevoegen; de weergaveregels moeten dus al alle pagina’s in de sectie omvatten. Voor een hele sectie stel je de locatie in op ‘alle pagina’s’ en laat je het URL-pad de selectie verfijnen."

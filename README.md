@@ -6,9 +6,12 @@
 [![GeneratePress Premium](https://img.shields.io/badge/GeneratePress%20Premium-2.0+-1e3a8a.svg)](https://generatepress.com/premium/)
 [![License](https://img.shields.io/badge/license-GPL--2.0+-green.svg)](LICENSE)
 
-GeneratePress Premium Elements can target an archive, but not a particular *page* of it. This plugin adds a **Paging Condition** box to every Element, so page one of a category can carry a large hero with SEO copy and a featured-post layout, while pages two onwards get a compact hero and a plain list.
+GeneratePress Premium Elements can target an archive, but not a particular *page* of it, and they can target a page, but not a whole section of the site. This plugin adds a **Page Conditions** box to every Element with two extra conditions:
 
-It is for anyone building a GeneratePress site with paginated archives, blog listings or search results who wants the first page to look different from the rest. It works with every Element type, and only ever hides an Element that GeneratePress was already going to show.
+- **Paging**, so page one of a category can carry a large hero with SEO copy and a featured-post layout, while pages two onwards get a compact hero and a plain list
+- **URL path**, so an Element can be limited to every page under `/docs/`, including ones added later, without listing each page in the display rules
+
+It is for anyone building a GeneratePress site who needs that finer control. It works with every Element type, and only ever hides an Element that GeneratePress was already going to show.
 
 It is an independent add-on, not made by the GeneratePress team.
 
@@ -20,7 +23,7 @@ It is an independent add-on, not made by the GeneratePress team.
 
 **Site builders**
 
-- [Using paging conditions](docs/using-paging-conditions.md) — each condition, the page list format, and common layouts
+- [Using page conditions](docs/using-page-conditions.md) — the paging and URL path conditions, and common layouts
 
 **Developers**
 

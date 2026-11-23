@@ -19,21 +19,16 @@ msgstr ""
 msgid "GP Elements Page Conditions"
 msgstr "GP Elements Page Conditions"
 
-#. Description of the plugin
-#: gp-elements-page-conditions.php
-msgid "Adds a paging condition to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, or limited to specific page numbers."
-msgstr "Añade una condición de paginación a GeneratePress Elements, de modo que un elemento pueda mostrarse únicamente en la primera página de una vista paginada, ocultarse en la primera página o limitarse a números de página específicos."
-
 #. Author of the plugin
 #: gp-elements-page-conditions.php
 msgid "Paul Faulkner"
 msgstr "Paul Faulkner"
 
-#: admin-templates/element-meta-box.php:22
+#: admin-templates/element-meta-box.php:29
 msgid "Applies on top of the display rules above, wherever pagination is in play: term and post type archives, the blog index, search results and multi-page posts."
 msgstr "Se aplica además de las reglas de visualización anteriores, siempre que haya paginación: archivos de términos y tipos de entradas, el índice del blog, los resultados de búsqueda y las entradas de varias páginas."
 
-#: admin-templates/element-meta-box.php:46
+#: admin-templates/element-meta-box.php:53
 msgctxt "field label; pages of a paginated archive"
 msgid "Page numbers"
 msgstr "Números de página"
@@ -58,19 +53,14 @@ msgctxt "paging condition; followed by a list of page numbers"
 msgid "Only show on pages…"
 msgstr "Mostrar solo en las páginas…"
 
-#: includes/class-meta-box.php:101
-msgctxt "meta box title; pagination of an archive"
-msgid "Paging Condition"
-msgstr "Condición de paginación"
-
 #. translators: 1: this plugin's name, 2: the name of the plugin it depends on
-#: includes/class-plugin.php:148
+#: includes/class-plugin.php:175
 #, php-format
 msgid "%1$s needs the Elements module of %2$s, which does not appear to be active. The plugin is doing nothing until it is."
 msgstr "%1$s necesita el módulo «Elements» de %2$s, que no parece estar activo. El complemento no hará nada hasta que lo esté."
 
 #. translators: 1: single page example, 2: closed range example, 3: open range example, 4: open range example. All four are literal syntax and must not be translated.
-#: admin-templates/element-meta-box.php:67
+#: admin-templates/element-meta-box.php:74
 #, php-format
 msgid "Comma separated. Accepts single pages (%1$s), ranges (%2$s) and open ranges (%3$s for page four onwards, %4$s for up to page three). Leaving this empty passes through."
 msgstr "Separados por comas. Acepta páginas individuales (%1$s), rangos (%2$s) y rangos abiertos (%3$s a partir de la página cuatro, %4$s hasta la página tres). Si se deja vacío, se pasa tal cual."
@@ -84,3 +74,46 @@ msgstr "https://headwall-hosting.com/plugins/gp-elements-page-conditions/"
 #: gp-elements-page-conditions.php
 msgid "https://headwall-hosting.com/a-web-guys-blog/"
 msgstr "https://headwall-hosting.com/a-web-guys-blog/"
+
+#: admin-templates/element-meta-box.php:24
+msgctxt "meta box section heading; pagination of an archive"
+msgid "Paging"
+msgstr "Paginación"
+
+#: admin-templates/element-meta-box.php:87
+msgctxt "meta box section heading; the path part of a web address"
+msgid "URL path"
+msgstr "Ruta de la URL"
+
+#: admin-templates/element-meta-box.php:101
+msgid "This site uses plain permalinks, so page addresses have no path to match and a URL path here hides the Element everywhere."
+msgstr "Este sitio web utiliza enlaces permanentes simples, por lo que las direcciones de las páginas no tienen ninguna ruta con la que coincidir y, en este caso, la ruta de la URL oculta el elemento en todas partes."
+
+#: admin-templates/element-meta-box.php:103
+msgid "Change the permalink structure"
+msgstr "Cambiar la estructura de los enlaces permanentes"
+
+#: admin-templates/element-meta-box.php:112
+msgctxt "field label; the path part of a web address"
+msgid "URL path starts with"
+msgstr "La ruta de la URL comienza por"
+
+#: includes/class-meta-box.php:101
+msgctxt "meta box title; extra rules for which pages an Element shows on"
+msgid "Page Conditions"
+msgstr "Condiciones de página"
+
+#. translators: 1: an example URL path, 2: a URL path below the first. Both are literal paths and must not be translated.
+#: admin-templates/element-meta-box.php:128
+#, php-format
+msgid "Separate paths with commas. Each path is relative to the site address and covers everything below it, so %1$s also covers %2$s. Leave this empty to show the Element on every path."
+msgstr "Separa las rutas con comas. Cada ruta es relativa a la dirección del sitio y abarca todo lo que hay por debajo de ella, por lo que %1$s también abarca %2$s. Déjalo en blanco para mostrar el elemento en todas las rutas."
+
+#. Description of the plugin
+#: gp-elements-page-conditions.php
+msgid "Adds paging and URL path conditions to GeneratePress Elements, so an Element can be shown only on page one of a paginated view, hidden from page one, limited to specific page numbers, or limited to one section of a site."
+msgstr "Añade condiciones de paginación y de ruta URL a GeneratePress Elements, de modo que un elemento pueda mostrarse únicamente en la primera página de una vista paginada, ocultarse en la primera página, limitarse a números de página específicos o restringirse a una sección concreta del sitio web."
+
+#: admin-templates/element-meta-box.php:92
+msgid "Shows this Element only where the page address starts with one of these paths. This can narrow the display rules but never add pages to them, so the display rules must already include every page in the section. For a whole section, set the Location to all pages and let the URL path narrow it down."
+msgstr "Muestra este elemento únicamente cuando la dirección de la página comience con una de estas rutas. Esto puede restringir las reglas de visualización, pero nunca añadir páginas a las mismas, por lo que las reglas de visualización deben incluir ya todas las páginas de la sección. Para toda una sección, configura la «Ubicación» en «todas las páginas» y deja que la ruta de la URL se encargue de restringirla."

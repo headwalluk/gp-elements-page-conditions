@@ -36,6 +36,13 @@ class Plugin {
 	private ?Paging_Condition $paging_condition = null;
 
 	/**
+	 * The display-time URL path condition.
+	 *
+	 * @var Path_Condition|null
+	 */
+	private ?Path_Condition $path_condition = null;
+
+	/**
 	 * Admin-area hook handlers.
 	 *
 	 * @var Admin_Hooks|null
@@ -82,6 +89,19 @@ class Plugin {
 	}
 
 	/**
+	 * Get the URL path condition, creating it on first use.
+	 *
+	 * @return Path_Condition
+	 */
+	public function get_path_condition(): Path_Condition {
+		if ( null === $this->path_condition ) {
+			$this->path_condition = new Path_Condition();
+		}
+
+		return $this->path_condition;
+	}
+
+	/**
 	 * Get the admin hook handlers, creating them on first use.
 	 *
 	 * @return Admin_Hooks
@@ -110,6 +130,13 @@ class Plugin {
 		add_filter(
 			ELEMENT_DISPLAY_FILTER,
 			array( $this->get_paging_condition(), 'filter_element_display' ),
+			ELEMENT_DISPLAY_PRIORITY,
+			2
+		);
+
+		add_filter(
+			ELEMENT_DISPLAY_FILTER,
+			array( $this->get_path_condition(), 'filter_element_display' ),
 			ELEMENT_DISPLAY_PRIORITY,
 			2
 		);

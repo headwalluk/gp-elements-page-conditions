@@ -10,13 +10,13 @@ Filter. Return `false` to stop the plugin checking GitHub for updates. It affect
 add_filter( 'hwpc_updater_enabled', '__return_false' );
 ```
 
-## Running after the paging condition
+## Running after the page conditions
 
-The plugin adds no filter of its own around the display decision; it hooks GeneratePress Premium's `generate_element_display` at priority **20**. To make your own decision with the paging condition already applied, hook the same filter at a priority above 20:
+The plugin adds no filter of its own around the display decision; it hooks GeneratePress Premium's `generate_element_display` at priority **20**, once for the paging condition and once for the URL path. To make your own decision with both already applied, hook the same filter at a priority above 20:
 
 ```php
 add_filter( 'generate_element_display', function ( $display, $element_id ) {
-	// $display already reflects GeneratePress's rules and the paging condition.
+	// $display already reflects GeneratePress's rules and both page conditions.
 	return $display;
 }, 30, 2 );
 ```
@@ -25,4 +25,4 @@ Keep to the same rule the plugin follows — only take an Element away — and d
 
 ## Stored data
 
-The paging condition is stored in post meta under fixed keys, listed in [How it works › Stored data](how-it-works.md#stored-data). Read them if you need to, but write them only through the Element edit screen.
+The page conditions are stored in post meta under fixed keys, listed in [How it works › Stored data](how-it-works.md#stored-data). Read them if you need to, but write them only through the Element edit screen.

@@ -9,6 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **URL path condition.** A new *URL path starts with* field limits an Element to
+  pages whose address starts with one of a list of paths, such as `/docs/`, so a
+  whole section of a site can get its own sidebar, hero or hook without listing
+  each page in the display rules. It matches whole path segments (`/docs/` covers
+  `/docs/installation/` but not `/docsearch/`), ignores case and the query
+  string, accepts pasted full URLs, and, like the paging condition, only ever
+  hides an Element GeneratePress would show. Stored in the new `_hwpc_path_prefixes`
+  meta key. The box explains that the display rules must already include the
+  section's pages, and warns when the site uses plain permalinks, which have no
+  path to match.
+
+### Changed
+- The meta box is now called **Page Conditions**, with *Paging* and *URL path*
+  sections. Its ID is unchanged, so hidden or collapsed boxes stay that way.
+- `docs/using-paging-conditions.md` is now `docs/using-page-conditions.md`, and
+  covers both conditions, with a recipe for a section-wide sidebar.
+
+### Fixed
+- **Background auto-updates could install a release that needs a newer PHP than
+  the server has** (since 1.1.0). The updater now reads `Requires PHP` and
+  `Requires at least` from the released plugin header at the release tag and
+  passes them to WordPress, which marks an incompatible update as such and
+  doesn't auto-install it. *View details* shows the new release's requirements.
+  A release whose header can't be read, or whose `Version:` disagrees with its
+  tag, is rejected and logged. Taken unchanged from the shared updater.
+
 ---
 
 ## [2.0.0] - 2026-11-22

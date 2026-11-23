@@ -49,6 +49,13 @@ const ELEMENT_DISPLAY_PRIORITY = 20;
 const META_CONDITION = 'archive_paging_visibility';
 const META_PAGES     = 'archive_paging_pages';
 
+/**
+ * Prefix for keys added since the ACF replacement. Underscored, so the Custom Fields box hides them.
+ */
+const META_PREFIX = '_hwpc_';
+
+const META_PATH_PREFIXES = META_PREFIX . 'path_prefixes';
+
 // ============================================================================
 // Paging Conditions - prefix with CONDITION_
 // ============================================================================
@@ -72,6 +79,14 @@ const CONTAINER_CLASS = 'hwpc-paging-condition';
  * Placeholder shown in the page list field. Literal syntax, so not translatable.
  */
 const PAGES_FIELD_EXAMPLE = '2-5, 8';
+
+const PATH_FIELD_ID = 'hwpc-path-prefixes';
+
+/**
+ * Path examples for the URL path field. Literal syntax, so not translatable.
+ */
+const PATH_FIELD_EXAMPLE       = '/docs/';
+const PATH_FIELD_EXAMPLE_CHILD = '/docs/installation/';
 
 /**
  * Where the plugin's .po/.mo files live, relative to the plugins directory.

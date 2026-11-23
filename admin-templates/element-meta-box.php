@@ -1,10 +1,12 @@
 <?php
 /**
- * Paging condition meta box on the GeneratePress Element edit screen.
+ * Page conditions meta box on the GeneratePress Element edit screen: paging, then URL path.
  *
  * Template variables:
- *   string $current_condition The Element's stored condition, defaulted.
- *   string $current_pages     The Element's stored page list.
+ *   string $current_condition   The Element's stored condition, defaulted.
+ *   string $current_pages       The Element's stored page list.
+ *   string $current_prefixes    The Element's stored URL path prefixes.
+ *   bool   $is_plain_permalinks Whether the site uses plain permalinks, which have no path to match.
  *
  * @package HeadwallPageConditions
  */
@@ -16,6 +18,11 @@ defined( 'ABSPATH' ) || die();
 wp_nonce_field( NONCE_ACTION, NONCE_FIELD );
 
 printf( '<div class="%s">', esc_attr( CONTAINER_CLASS ) );
+
+printf(
+	'<h4 class="hwpc-section-title">%s</h4>',
+	esc_html_x( 'Paging', 'meta box section heading; pagination of an archive', 'gp-elements-page-conditions' )
+);
 
 printf(
 	'<p class="hwpc-intro">%s</p>',
@@ -69,6 +76,58 @@ printf(
 			'2-5',
 			'4-',
 			'-3'
+		)
+	)
+);
+
+echo '</p>';
+
+printf(
+	'<h4 class="hwpc-section-title">%s</h4>',
+	esc_html_x( 'URL path', 'meta box section heading; the path part of a web address', 'gp-elements-page-conditions' )
+);
+
+printf(
+	'<p class="hwpc-intro">%s</p>',
+	esc_html__(
+		'Shows this Element only where the page address starts with one of these paths. This can narrow the display rules but never add pages to them, so the display rules must already include every page in the section. For a whole section, set the Location to all pages and let the URL path narrow it down.',
+		'gp-elements-page-conditions'
+	)
+);
+
+if ( $is_plain_permalinks ) {
+	printf(
+		'<div class="notice notice-warning inline"><p>%s <a href="%s">%s</a></p></div>',
+		esc_html__( 'This site uses plain permalinks, so page addresses have no path to match and a URL path here hides the Element everywhere.', 'gp-elements-page-conditions' ),
+		esc_url( admin_url( 'options-permalink.php' ) ),
+		esc_html__( 'Change the permalink structure', 'gp-elements-page-conditions' )
+	);
+}
+
+echo '<p class="hwpc-path">';
+
+printf(
+	'<label for="%s">%s</label>',
+	esc_attr( PATH_FIELD_ID ),
+	esc_html_x( 'URL path starts with', 'field label; the path part of a web address', 'gp-elements-page-conditions' )
+);
+
+printf(
+	'<input type="text" class="regular-text code" id="%s" name="%s" value="%s" placeholder="%s" />',
+	esc_attr( PATH_FIELD_ID ),
+	esc_attr( META_PATH_PREFIXES ),
+	esc_attr( $current_prefixes ),
+	esc_attr( PATH_FIELD_EXAMPLE )
+);
+
+printf(
+	'<span class="description">%s</span>',
+	esc_html(
+		sprintf(
+			/* translators: 1: an example URL path, 2: a URL path below the first. Both are literal paths and must not be translated. */
+			__( 'Separate paths with commas. Each path is relative to the site address and covers everything below it, so %1$s also covers %2$s. Leave this empty to show the Element on every path.', 'gp-elements-page-conditions' ),
+			PATH_FIELD_EXAMPLE,
+			PATH_FIELD_EXAMPLE_CHILD
 		)
 	)
 );

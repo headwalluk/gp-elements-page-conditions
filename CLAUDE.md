@@ -11,8 +11,10 @@ GP Elements Page Conditions.
 
 ## Project Overview
 
-A small add-on that gives GeneratePress Premium Elements a paging condition: an Element can be
-limited to page one of a paginated view, hidden from it, or restricted to specific page numbers.
+A small add-on that gives GeneratePress Premium Elements two extra conditions, both in the
+plugin's own **Page Conditions** meta box: **paging** (page one only, never page one, or listed
+page numbers) and **URL path** (only where the request path starts with a listed prefix, such as
+`/docs/`). Both only ever hide an Element GeneratePress would show.
 
 - **Namespace:** `Headwall_Page_Conditions` · **Text domain:** `gp-elements-page-conditions` · **Prefixes:** `hwpc_` (filters), `HWPC_` (global constants). The updater names its transients from the slug (`gp_elements_page_conditions_github_*`)
 - **PHP / WordPress floor:** 8.2 / 6.9, the skill defaults, raised from 8.0 / 6.0 for 2.0.0
@@ -32,6 +34,9 @@ theme, and reads the data that setup stored:
   default to `''`
 - `uninstall.php` deletes only the updater's cache transients. The meta stays, so a reinstall or a
   rollback to the ACF setup finds it
+- Keys added since the ACF replacement follow the prefix rule: `META_PREFIX` (`_hwpc_`), e.g.
+  `META_PATH_PREFIXES`. The underscore keeps them out of the Custom Fields box, so they aren't
+  registered with `register_post_meta()`; only the meta box writes them
 
 ## Architecture
 
@@ -40,18 +45,24 @@ and starts `Plugin::instance()->run()` (also assigned to `global $hwpc_plugin`, 
 that already reads it). On admin, cron and WP-CLI requests it also creates `Github_Updater`.
 
 - **`Plugin`** — singleton; wires every hook in `run()`; lazy getters `get_meta_box()`,
-  `get_paging_condition()`, `get_admin_hooks()`; the missing-dependency notice
+  `get_paging_condition()`, `get_path_condition()`, `get_admin_hooks()`; the missing-dependency notice
 - **`Meta_Box`** — `register_meta()` (on `init`), and the Element edit screen box: `register()`,
   `render()`, `save()`
 - **`Paging_Condition`** — the display decision. `filter_element_display()` is the
   `generate_element_display` callback; `get_current_page_number()` reads `paged`, then `page`
 - **`Page_List`** — parses the page list: `sanitise()` on save, `matches()` at display time.
   Pure, no WordPress calls. Static only and never instantiated
+- **`Path_Condition`** — the URL path decision, a second `generate_element_display` callback;
+  `get_current_path()` reads `$wp->request`
+- **`Path_List`** — normalises and matches URL path prefixes, as `Page_List` does for pages.
+  No WordPress state (it calls `wp_parse_url()`); static only
 - **`Admin_Hooks`** — enqueues the admin CSS/JS, on the Element edit screen only
 - **`Github_Updater`** — the skill's shared updater, unchanged apart from `namespace`/`@package`
 
 The meta box template is `admin-templates/element-meta-box.php`, included from
-`Meta_Box::render()` with `$current_condition` and `$current_pages` in scope.
+`Meta_Box::render()`; its docblock lists the variables it reads. The meta box ID stays
+`hwpc-paging-condition` (`META_BOX_ID`), though its title is now "Page Conditions": WordPress keys
+each user's hidden and collapsed boxes on the ID.
 
 ### GeneratePress integration
 
@@ -62,6 +73,10 @@ classes (Block, Layout, Hook, Hero). The plugin hooks it at priority `20`
 The filter must only ever take an Element **away**. If `$is_displayed` arrives falsy, return it
 untouched; never show an Element GeneratePress excluded. `filter_element_display()` is the
 plugin's `mixed`-callback pattern.
+
+GeneratePress's own Location list has no filters (`get_conditions()`, `show_data()`), and its
+Display Rules save strips slashes from a rule's object, so new conditions go in the plugin's meta
+box, as restrictions, never into GeneratePress's box. See `docs/developers/how-it-works.md`.
 
 ### Translations
 
@@ -83,6 +98,9 @@ Harnesses in `dev-notes/testing/` (untracked):
 - `test-page-list.php` — parser cases, dash folding
 - `test-paging-condition.php` — every condition, the defensive path, the registered sanitiser.
   Creates and deletes a draft `gp_elements` post
+- `test-path-list.php` — URL path normalising and matching
+- `test-path-condition.php` — the path filter, combined with paging, and `Meta_Box::save()` with a
+  real nonce. Sets `$GLOBALS['wp']->request`, which WP-CLI leaves empty, and restores it
 - `test-github-updater.php` — ported from Quick 2FA; one live GitHub API call
 
 Run each with `wp eval-file wp-content/plugins/gp-elements-page-conditions/dev-notes/testing/<file>.php`.
@@ -95,6 +113,7 @@ On top of the skill's general table:
 | Contract | Examples | Breaks when |
 |----------|----------|-------------|
 | Legacy meta keys and values | `archive_paging_visibility`, `archive_paging_pages`, `only_page_one` | a `META_` or `CONDITION_` constant's **value** changes |
+| URL path meta key and format | `_hwpc_path_prefixes` holding `/docs/, /guides/` | the key or the normalised format changes |
 | Updater filter | `hwpc_updater_enabled` | renamed or removed |
 | Display filter priority | `generate_element_display` at `20` | lowered below GeneratePress's own decision, or the take-away-only rule is broken |
 | Script and style handle | `gp-elements-page-conditions-admin` | renamed |
@@ -103,8 +122,8 @@ On top of the skill's general table:
 ## Documentation
 
 - `docs/getting-started.md` — site owners: requirements, install, updates, uninstalling, moving from the ACF version
-- `docs/using-paging-conditions.md` — site builders: each condition, the page list format, layouts, troubleshooting
-- `docs/developers/how-it-works.md` — developers: the display decision, stored data, page list format, testing, releasing
+- `docs/using-page-conditions.md` — site builders: both conditions, their formats, layouts, troubleshooting
+- `docs/developers/how-it-works.md` — developers: the display decision, stored data, both list formats, testing, releasing
 - `docs/developers/hooks-and-filters.md` — the public extension surface
 
 A change to behaviour, stored data, a hook or the release process updates the matching doc in

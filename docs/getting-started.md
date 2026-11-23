@@ -12,17 +12,17 @@ Without the Elements module the plugin does nothing, and shows an admin notice s
 
 1. Download `gp-elements-page-conditions.zip` from the [latest release](https://github.com/headwalluk/gp-elements-page-conditions/releases/latest)
 2. WordPress admin → Plugins → Add New → Upload Plugin → choose the zip → Install Now → Activate
-3. Edit any Element (Appearance → Elements) and look for the **Paging Condition** box
+3. Edit any Element (Appearance → Elements) and look for the **Page Conditions** box
 
-There are no settings screens. Everything is set per Element; see [Using paging conditions](using-paging-conditions.md).
+There are no settings screens. Everything is set per Element; see [Using page conditions](using-page-conditions.md).
 
 The plugin is not on wordpress.org, so always install from the GitHub release zip. The **Code → Download ZIP** button on GitHub gives you a folder named after the branch, which WordPress installs as a separate plugin.
 
 ## Updates
 
-From version 1.1.0 the plugin checks GitHub for new releases and offers them on the normal Dashboard → Updates screen, like any other plugin. It checks at most every 12 hours, and backs off for an hour if GitHub can't be reached.
+From version 1.1.0 the plugin checks GitHub for new releases and offers them on the normal Dashboard → Updates screen, like any other plugin. It checks at most every 12 hours, and backs off for an hour if GitHub can't be reached. Each check asks `api.github.com` for the latest release, then reads that release's plugin header from `raw.githubusercontent.com` to learn the PHP and WordPress versions it needs. Both are ordinary WordPress HTTP requests, so like any other they carry WordPress's default user agent, which names the WordPress version and the site's address.
 
-Version 2.0.0 raised the requirements to WordPress 6.9 and PHP 8.2. On an older site the update is still listed, but WordPress refuses to install it, naming the version it needs. Stay on 1.1.1 until the site or server is upgraded.
+Version 2.0.0 raised the requirements to WordPress 6.9 and PHP 8.2. On an older site the update is still listed, but WordPress refuses to install it, naming the version it needs. Stay on 1.1.1 until the site or server is upgraded. From 2.1.0, the update check passes those requirements to WordPress, so an update the site can't run is marked as incompatible on the Updates screen and is never installed automatically.
 
 Sites still on **1.0.0** have no updater. Install the latest release zip by hand once — WordPress offers to replace the existing copy — and updates are automatic from then on.
 
@@ -34,7 +34,7 @@ add_filter( 'hwpc_updater_enabled', '__return_false' );
 
 ## Uninstalling
 
-Deleting the plugin leaves each Element's stored condition in place, so reinstalling brings the settings back. Only the cached update check is removed. With the plugin gone the conditions are simply ignored, and every Element shows according to its GeneratePress display rules alone.
+Deleting the plugin leaves each Element's stored conditions in place, so reinstalling brings the settings back. Only the cached update check is removed. With the plugin gone the conditions are simply ignored, and every Element shows according to its GeneratePress display rules alone.
 
 ## Moving from the ACF version
 

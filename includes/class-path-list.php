@@ -32,9 +32,9 @@ class Path_List {
 		foreach ( self::split( $raw_list ) as $segment ) {
 			$prefix = self::normalise( $segment, $home_path );
 
-			if ( '' !== $prefix && ! in_array( strtolower( $prefix ), $lowercase_set, true ) ) {
+			if ( '' !== $prefix && ! in_array( self::fold_case( $prefix ), $lowercase_set, true ) ) {
 				$prefixes[]      = $prefix;
-				$lowercase_set[] = strtolower( $prefix );
+				$lowercase_set[] = self::fold_case( $prefix );
 			}
 		}
 
@@ -51,12 +51,12 @@ class Path_List {
 	 */
 	public static function matches( string $request_path, string $raw_list ): bool {
 		$is_matched = false;
-		$directory  = strtolower( self::to_directory_path( $request_path ) );
+		$directory  = self::fold_case( self::to_directory_path( $request_path ) );
 
 		foreach ( self::split( $raw_list ) as $segment ) {
 			$prefix = self::normalise( $segment, '/' );
 
-			if ( '' !== $prefix && str_starts_with( $directory, strtolower( $prefix ) ) ) {
+			if ( '' !== $prefix && str_starts_with( $directory, self::fold_case( $prefix ) ) ) {
 				$is_matched = true;
 				break;
 			}
@@ -73,7 +73,21 @@ class Path_List {
 	 * @return string[] The segments, in the order they were written.
 	 */
 	private static function split( string $raw_list ): array {
-		return array_values( array_filter( preg_split( '/[\s,]+/', $raw_list ), 'strlen' ) );
+		// Query strings and fragments go first, so a comma inside one can't start a new entry.
+		$without_queries = (string) preg_replace( '/[?#]\S*/', '', $raw_list );
+
+		return array_values( array_filter( preg_split( '/[\s,]+/', $without_queries ), 'strlen' ) );
+	}
+
+	/**
+	 * Lowercase a path, including non-ASCII letters where mbstring is available.
+	 *
+	 * @param string $path A URL path.
+	 *
+	 * @return string
+	 */
+	private static function fold_case( string $path ): string {
+		return function_exists( 'mb_strtolower' ) ? mb_strtolower( $path, 'UTF-8' ) : strtolower( $path );
 	}
 
 	/**
@@ -89,10 +103,10 @@ class Path_List {
 
 		if ( 1 === preg_match( '#^https?://#i', $path ) ) {
 			$path      = (string) wp_parse_url( $path, PHP_URL_PATH );
-			$home_root = strtolower( self::to_directory_path( $home_path ) );
+			$home_root = self::fold_case( self::to_directory_path( $home_path ) );
 
 			// A full URL carries the home path of a subdirectory install; stored prefixes are relative to it.
-			if ( '/' !== $home_root && str_starts_with( strtolower( self::to_directory_path( $path ) ), $home_root ) ) {
+			if ( '/' !== $home_root && str_starts_with( self::fold_case( self::to_directory_path( $path ) ), $home_root ) ) {
 				$path = substr( self::to_directory_path( $path ), strlen( $home_root ) - 1 );
 			}
 		}

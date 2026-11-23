@@ -69,16 +69,16 @@ Typographic dashes (en dash, em dash, minus sign and the other Unicode hyphens) 
 
 ## The URL path format
 
-The field takes paths separated by commas or whitespace. On save, each one is:
+The field takes paths separated by commas or whitespace. On save, the whole field is percent-decoded, before `sanitize_text_field()`, which would otherwise strip the encoded octets of a non-ASCII slug. A field that isn't a string leaves the stored prefixes untouched. Then:
 
-1. Percent-decoded, before `sanitize_text_field()`, which would otherwise strip the encoded octets of a non-ASCII slug
-2. Reduced to its path, if it is a full `http(s)://` URL, with the home URL's path removed on a subdirectory install
-3. Cut at the first `?` or `#`
-4. Dropped if it holds `<`, `>`, quotes, a backtick, a backslash or a control character
-5. Given single leading and trailing slashes, with repeated slashes collapsed
-6. Dropped if it repeats an earlier entry, ignoring case
+1. Query strings and fragments are dropped, from each `?` or `#` to the next whitespace, so a comma inside a pasted URL's query string can't start a new entry
+2. The field is split on commas and whitespace
+3. A full `http(s)://` URL is reduced to its path, with the home URL's path removed on a subdirectory install
+4. An entry is dropped if it holds `<`, `>`, quotes, a backtick, a backslash or a control character
+5. Each entry gets single leading and trailing slashes, with repeated slashes collapsed
+6. An entry is dropped if it repeats an earlier one, ignoring case
 
-At display time, the request path is wrapped the same way, so `docs/installation` becomes `/docs/installation/`, and the Element shows if it starts with any stored prefix, ignoring case. The trailing slash on both sides is what makes matching whole-segment: `/docs/` is not a prefix of `/docsearch/`. The home page is `/`, matched only by a `/` prefix.
+At display time, the request path is wrapped the same way, so `docs/installation` becomes `/docs/installation/`, and the Element shows if it starts with any stored prefix, ignoring case. Case is folded with `mb_strtolower()`, so `/CAFÉ/` covers `/café/`; where mbstring is missing it falls back to `strtolower()`, which folds ASCII only. The trailing slash on both sides is what makes matching whole-segment: `/docs/` is not a prefix of `/docsearch/`. The home page is `/`, matched only by a `/` prefix.
 
 Under plain permalinks `$wp->request` is empty on every page, so nothing but `/` can match. The meta box warns when `permalink_structure` is empty; the condition itself doesn't special-case it.
 

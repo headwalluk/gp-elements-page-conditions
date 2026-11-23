@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **A comma in a pasted URL's query string no longer adds an entry.** Pasting
+  `https://example.com/docs/?sections=intro,api` into *URL path starts with*
+  saved `/docs/, /api/`; query strings and fragments are now dropped before the
+  list is split.
+- **Saving an Element with a malformed URL path field no longer fails.** A
+  non-string value threw a `TypeError` and the save stopped; the stored prefixes
+  are now kept and the rest of the box saves as normal.
+- **URL path matching now ignores the case of non-ASCII letters,** so `/CAFÉ/`
+  covers `/café/menu/`, as the docs promise. Falls back to ASCII-only folding
+  where mbstring is missing.
+- **Docs:** the category hero recipe named the *Post Category* Location, which
+  matches single posts in a category. The archive is *Post Category Archive*.
+  `getting-started.md` no longer says auto-updates check the WordPress version;
+  WordPress checks only PHP there.
+
 ---
 
 ## [2.1.0] - 2026-11-23

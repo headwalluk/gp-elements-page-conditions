@@ -153,11 +153,11 @@ class Meta_Box {
 			? sanitize_text_field( wp_unslash( $_POST[ META_PAGES ] ) )
 			: '';
 
-		// Decoded first: sanitize_text_field() strips percent-encoded octets, which would mangle non-ASCII slugs.
-		$submitted_prefixes = isset( $_POST[ META_PATH_PREFIXES ] )
-			? sanitize_text_field( rawurldecode( wp_unslash( $_POST[ META_PATH_PREFIXES ] ) ) ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitize_text_field() runs on the decoded value, then Path_List::sanitise().
-			: '';
+		$raw_prefixes = isset( $_POST[ META_PATH_PREFIXES ] ) ? wp_unslash( $_POST[ META_PATH_PREFIXES ] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Type-checked, decoded and sanitised below.
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
+
+		// Decoded first: sanitize_text_field() strips percent-encoded octets, which would mangle non-ASCII slugs.
+		$submitted_prefixes = is_string( $raw_prefixes ) ? sanitize_text_field( rawurldecode( $raw_prefixes ) ) : null;
 
 		if ( ! is_known_condition( $submitted_condition ) ) {
 			$submitted_condition = CONDITION_DEFAULT;
@@ -165,7 +165,12 @@ class Meta_Box {
 
 		$this->store_meta( $element_id, META_CONDITION, CONDITION_DEFAULT === $submitted_condition ? '' : $submitted_condition );
 		$this->store_meta( $element_id, META_PAGES, Page_List::sanitise( $submitted_pages ) );
-		$this->store_meta( $element_id, META_PATH_PREFIXES, Path_List::sanitise( $submitted_prefixes, $this->get_home_path() ) );
+
+		if ( is_string( $submitted_prefixes ) ) {
+			$this->store_meta( $element_id, META_PATH_PREFIXES, Path_List::sanitise( $submitted_prefixes, $this->get_home_path() ) );
+		} else {
+			// A malformed (non-string) field: keep the stored prefixes rather than guess.
+		}
 	}
 
 	/**

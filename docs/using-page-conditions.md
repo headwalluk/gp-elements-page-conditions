@@ -9,7 +9,7 @@ Every Element already has GeneratePress **Display Rules** — *Location*, *Exclu
 - If the display rules say *show*, each condition decides whether it still shows on the current page
 - If the display rules say *don't show*, the Element stays hidden whatever the conditions say
 
-So set up the display rules first, broadly (for example *Location: Post Category → All Categories*, or *Location: Page → All Pages*), then use a condition to narrow them down.
+So set up the display rules first, broadly (for example *Location: Post Category Archive → All Categories*, or *Location: Page → All Pages*), then use a condition to narrow them down.
 
 Both conditions are in the **Page Conditions** box when editing an Element. When both are set, the Element shows only where both allow it.
 
@@ -84,7 +84,7 @@ A new page under `/docs/` gets the sidebar as soon as it's published. Use *Locat
 
 The original use case: page one of each category gets a large hero with an introduction written for search engines, and later pages get a slim title bar.
 
-1. **Element A** — a Block Element with the *Page Hero* type. Display rules: *Post Category → All Categories*. Paging: **Only show on page one**
+1. **Element A** — a Block Element with the *Page Hero* type. Display rules: *Post Category Archive → All Categories*. Paging: **Only show on page one**
 2. **Element B** — the compact version, with the same display rules. Paging: **Never show on page one**
 
 Exactly one of them shows on every page of every category.

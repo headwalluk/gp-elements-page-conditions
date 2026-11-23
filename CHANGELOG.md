@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [2.1.0] - 2026-11-23
+
 ### Added
 - **URL path condition.** A new *URL path starts with* field limits an Element to
   pages whose address starts with one of a list of paths, such as `/docs/`, so a
